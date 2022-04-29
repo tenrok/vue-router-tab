@@ -22,7 +22,7 @@
             :data="item"
             :index="index"
             @contextmenu.native.prevent="
-              e => showContextmenu(item.id, index, e)
+              e => showContextmenu(item.id, index, e, item.parentPath)
             "
           />
         </transition-group>
