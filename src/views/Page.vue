@@ -12,7 +12,7 @@
       </router-link>
 
       <a class="demo-btn" @click="$tabs.open(nextId, false, true, true)">
-        Новая страница с родительской связью{{ nextId }}”
+        New page with parent link {{ nextId }}
       </a>
     </p>
 
