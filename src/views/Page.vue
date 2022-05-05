@@ -11,8 +11,8 @@
         打开“页面{{ nextId }}”
       </router-link>
 
-      <a class="demo-btn" @click="$tabs.open(nextId, true)">
-        全新打开“页面{{ nextId }}”
+      <a class="demo-btn" @click="$tabs.open(nextId, false, true, true)">
+        Новая страница с родительской связью{{ nextId }}”
       </a>
     </p>
 
@@ -21,7 +21,7 @@
         打开“页面{{ prevId }}”
       </router-link>
 
-      <a class="demo-btn" @click="$tabs.open(prevId, true)">
+      <a class="demo-btn" @click="$tabs.open(prevId, false, true, true)">
         全新打开“页面{{ prevId }}”
       </a>
     </p>

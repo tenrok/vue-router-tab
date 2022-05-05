@@ -52,7 +52,8 @@ export default {
           alias: 'menuClass'
         },
         visible: true, // 是否显示
-        enable: true // 是否启用
+        enable: true, // 是否启用
+        parentPath: ''
       },
       'context'
     )
