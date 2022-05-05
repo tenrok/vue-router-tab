@@ -8,17 +8,23 @@
     "tabs"
   ],
   "author": "碧海幽虹 <bhuh12@126.com>",
-  "private": false,
+  "contributors": [
+    {
+      "name": "rat1borik",
+      "url": "https://github.com/rat1borik"
+    }
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bhuh12/vue-router-tab.git"
+    "url": "git+https://github.com/tenrok/vue-router-tab.git"
   },
+  "private": true,
   "publishConfig": {
-    "registry": "https://registry.npmjs.org"
+    "registry": "https://nexus.company.lan/repository/npm-private/"
   },
   "bugs": {
-    "url": "https://github.com/bhuh12/vue-router-tab/issues"
+    "url": "https://github.com/tenrok/vue-router-tab/issues"
   },
   "main": "dist/lib/vue-router-tab.umd.min.js",
   "scripts": {
