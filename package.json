@@ -1,5 +1,5 @@
 {
-  "name": "vue-router-tab",
+  "name": "@tenrok/vue-router-tab",
   "version": "1.2.12",
   "description": "Vue.js tab components, based on Vue Router",
   "keywords": [
@@ -19,10 +19,7 @@
     "type": "git",
     "url": "git+https://github.com/tenrok/vue-router-tab.git"
   },
-  "private": true,
-  "publishConfig": {
-    "registry": "https://nexus.company.lan/repository/npm-private/"
-  },
+  "private": false,
   "bugs": {
     "url": "https://github.com/tenrok/vue-router-tab/issues"
   },
