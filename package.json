@@ -1,5 +1,5 @@
 {
-  "name": "vue-router-tab",
+  "name": "@tenrok/vue-router-tab",
   "version": "1.2.13",
   "description": "Vue.js tab components, based on Vue Router",
   "keywords": [
