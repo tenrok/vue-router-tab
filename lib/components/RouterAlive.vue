@@ -1,5 +1,10 @@
 <template>
-  <div class="router-alive">
+  <div
+    class="router-alive"
+    @drop="onDrop($event)"
+    @dragover.prevent
+    @dragenter.prevent
+  >
     <transition
       v-bind="pageTrans"
       appear
@@ -47,12 +52,14 @@ const PAGE_HOOKS = [
   'destroyed'
 ]
 
+const TRANSFER_PREFIX = 'RouterTabDragSortIndex:'
+
 /**
  * 路由缓存控件
  */
 export default {
   name: 'RouterAlive',
-
+  inject: ['$dah'],
   provide() {
     // 提供实例给子组件调用
     return {
@@ -199,6 +206,19 @@ export default {
   },
 
   methods: {
+    onDrop(e) {
+      const { items } = this.$tabs
+      const raw = e.dataTransfer.getData('text')
+
+      if (typeof raw !== 'string' || !raw.startsWith(TRANSFER_PREFIX)) return
+
+      const fromIndex = raw.replace(TRANSFER_PREFIX, '')
+      const tab = items[fromIndex]
+      console.log(this.$contextMenu, tab)
+      console.log(e)
+      this.$dah && this.$dah({ $tabs: this.$tabs, data: tab })
+    },
+
     // 获取页面路由索引
     getRouteIndex() {
       let cur = this
