@@ -2,7 +2,7 @@
   <div
     class="router-alive"
     @drop="onDrop($event)"
-    @dragover.prevent
+    @dragover.prevent="onDragOver($event)"
     @dragenter.prevent
   >
     <transition
@@ -206,6 +206,10 @@ export default {
   },
 
   methods: {
+    onDragOver(e) {
+      e.dataTransfer.dropEffect = 'link'
+    },
+
     onDrop(e) {
       const { items } = this.$tabs
       const raw = e.dataTransfer.getData('text')
