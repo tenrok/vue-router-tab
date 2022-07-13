@@ -53,7 +53,7 @@ export default {
 
           // 点击触发
           handler(context) {
-            console.log(context)
+            //console.log(context)
             alert('这是自定义操作，请打开控制台查看输出参数')
           }
         },

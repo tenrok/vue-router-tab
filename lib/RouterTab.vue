@@ -91,15 +91,10 @@
         v-if="contextmenu !== false && contextData.index > -1"
         :data="contextData"
         :menu="contextMenu"
+        :menu-pinned="contextMenuPinned"
       />
     </transition>
   </div>
 </template>
 
 <script src="./RouterTab.js"></script>
-
-<style scoped>
-.router-tab__pinned {
-  background-color: grey;
-}
-</style>

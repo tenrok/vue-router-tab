@@ -50,7 +50,7 @@ export default {
 
     // 菜单选项
     menuList() {
-      console.log(this.data)
+      //console.log(this.data)
       return (this.data.pinned ? this.menuPinned : this.menu)
         .map(item => {
           if (typeof item === 'string') {

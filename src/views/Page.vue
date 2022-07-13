@@ -79,7 +79,7 @@ export default {
 
   methods: {
     click() {
-      console.log(`页面${this.pageId}`)
+      //console.log(`页面${this.pageId}`)
     }
   }
 }

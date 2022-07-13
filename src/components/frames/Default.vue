@@ -45,7 +45,7 @@ export default {
       ],
 
       onDropAlive(context) {
-        console.log(context)
+        //console.log(context)
       }
     }
   }

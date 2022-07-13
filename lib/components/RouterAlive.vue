@@ -218,8 +218,8 @@ export default {
 
       const fromIndex = raw.replace(TRANSFER_PREFIX, '')
       const tab = items[fromIndex]
-      console.log(this.$contextMenu, tab)
-      console.log(e)
+      //console.log(this.$contextMenu, tab)
+      //console.log(e)
       this.$dah && this.$dah({ $tabs: this.$tabs, data: tab })
     },
 
