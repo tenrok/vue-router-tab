@@ -1,11 +1,13 @@
 <template>
   <router-tab
     :contextmenu="contextMenu"
+    :contextmenu-pinned="contextMenuPinned"
     :on-drop-alive="onDropAlive"
     :use-inheritance="true"
     :tabs="tabs"
     allow-pin
-  />
+    ><template #divider><div class="pin-divider">|</div></template>
+  </router-tab>
 </template>
 
 <script>
@@ -33,6 +35,26 @@ export default {
         }
       ],
 
+      contextMenuPinned: [
+        { id: 'refresh', icon: 'fas fa-sync-alt' },
+        'refreshAll',
+        { id: 'close', icon: 'fas fa-times' },
+        { id: 'unpin', icon: 'fa-solid fa-thumbtack' },
+        {
+          id: 'inWindow',
+          title: 'В новом окне',
+          icon: 'fas fa-external-link-alt',
+          enable(context) {
+            return /^\/document|manager|service\d*\//.test(context.data.id)
+          },
+
+          handler(context) {
+            context.$tabs.close(context.data.id)
+            context.target.$open(`/x${context.data.id}`)
+          }
+        }
+      ],
+
       tabs: [
         '/default/page/1',
         {
@@ -51,3 +73,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.pin-divider {
+  margin: auto;
+}
+</style>

@@ -7,7 +7,7 @@
       </div>
       <div v-if="allowPin" class="router-tab__pinned">
         <!-- 页签列表 -->
-        <div
+        <transition-group
           tag="ul"
           class="router-tab__nav"
           v-bind="tabTrans"
@@ -24,8 +24,9 @@
               e => showContextmenu(item.id, item.pinned, index, e)
             "
           />
-        </div>
+        </transition-group>
       </div>
+      <slot name="divider" />
       <tab-scroll ref="scroll">
         <!-- 页签列表 -->
         <transition-group
