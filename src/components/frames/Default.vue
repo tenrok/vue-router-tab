@@ -3,6 +3,8 @@
     :contextmenu="contextMenu"
     :on-drop-alive="onDropAlive"
     :use-inheritance="true"
+    :tabs="tabs"
+    allow-pin
   />
 </template>
 
@@ -19,6 +21,7 @@ export default {
         'closeLefts',
         'closeRights',
         'closeOthers',
+        'pin',
         {
           id: 'inWindow',
           title: 'В новом окне',
@@ -27,6 +30,17 @@ export default {
           handler(context) {
             alert(context)
           }
+        }
+      ],
+
+      tabs: [
+        '/default/page/1',
+        {
+          to: '/default/page/2',
+          title: 'kavo',
+          pinned: true,
+          unpinnable: false,
+          closable: false
         }
       ],
 

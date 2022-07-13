@@ -17,7 +17,7 @@
 
 <script>
 import TabContextmenuItem from './ContextmenuItem.vue'
-import menuMap, { defaultMenu } from '../config/contextmenu'
+import menuMap, { defaultMenu, defaultMenuPinned } from '../config/contextmenu'
 
 export default {
   name: 'TabContextmenu',
@@ -34,6 +34,11 @@ export default {
     menu: {
       type: Array,
       default: () => defaultMenu
+    },
+
+    menuPinned: {
+      type: Array,
+      default: () => defaultMenuPinned
     }
   },
 
@@ -45,7 +50,8 @@ export default {
 
     // 菜单选项
     menuList() {
-      return this.menu
+      console.log(this.data)
+      return (this.data.pinned ? this.menuPinned : this.menu)
         .map(item => {
           if (typeof item === 'string') {
             // 内置菜单

@@ -5,7 +5,27 @@
       <div class="router-tab__slot-start">
         <slot name="start" />
       </div>
-
+      <div v-if="allowPin" class="router-tab__pinned">
+        <!-- 页签列表 -->
+        <div
+          tag="ul"
+          class="router-tab__nav"
+          v-bind="tabTrans"
+          @after-enter="onTabTrans"
+          @after-leave="onTabTrans"
+        >
+          <tab-item
+            v-for="(item, index) in items.filter(tab => tab.pinned)"
+            :key="item.id || item.to"
+            ref="tab"
+            :data="item"
+            :index="index"
+            @contextmenu.native.prevent="
+              e => showContextmenu(item.id, item.pinned, index, e)
+            "
+          />
+        </div>
+      </div>
       <tab-scroll ref="scroll">
         <!-- 页签列表 -->
         <transition-group
@@ -16,13 +36,13 @@
           @after-leave="onTabTrans"
         >
           <tab-item
-            v-for="(item, index) in items"
+            v-for="(item, index) in items.filter(tab => !tab.pinned)"
             :key="item.id || item.to"
             ref="tab"
             :data="item"
             :index="index"
             @contextmenu.native.prevent="
-              e => showContextmenu(item.id, index, e)
+              e => showContextmenu(item.id, item.pinned, index, e)
             "
           />
         </transition-group>
@@ -77,3 +97,9 @@
 </template>
 
 <script src="./RouterTab.js"></script>
+
+<style scoped>
+.router-tab__pinned {
+  background-color: grey;
+}
+</style>
