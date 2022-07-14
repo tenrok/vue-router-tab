@@ -6,7 +6,7 @@
     :use-inheritance="true"
     :tabs="tabs"
     allow-pin
-    ><template #divider><div class="pin-divider">|</div></template>
+    ><template #divider><div class="pin-divider"></div></template>
   </router-tab>
 </template>
 
@@ -76,6 +76,10 @@ export default {
 
 <style scoped>
 .pin-divider {
-  margin: auto;
+  top: 0;
+  bottom: 0;
+  background: grey;
+  width: 3px;
+  margin: 2px;
 }
 </style>

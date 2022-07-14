@@ -5,7 +5,8 @@
       <div class="router-tab__slot-start">
         <slot name="start" />
       </div>
-      <div v-if="allowPin" class="router-tab__pinned">
+      <div v-if="allowPin"></div>
+      <div class="router-tab__pinned">
         <!-- 页签列表 -->
         <transition-group
           tag="ul"
@@ -15,18 +16,18 @@
           @after-leave="onTabTrans"
         >
           <tab-item
-            v-for="(item, index) in items.filter(tab => tab.pinned)"
+            v-for="item in items.filter(tab => tab.pinned)"
             :key="item.id || item.to"
             ref="tab"
             :data="item"
-            :index="index"
+            :index="items.indexOf(item)"
             @contextmenu.native.prevent="
-              e => showContextmenu(item.id, item.pinned, index, e)
+              e => showContextmenu(item.id, item.pinned, items.indexOf(item), e)
             "
           />
         </transition-group>
       </div>
-      <slot name="divider" />
+      <slot v-if="allowPin" name="divider" />
       <tab-scroll ref="scroll">
         <!-- 页签列表 -->
         <transition-group
@@ -37,13 +38,13 @@
           @after-leave="onTabTrans"
         >
           <tab-item
-            v-for="(item, index) in items.filter(tab => !tab.pinned)"
+            v-for="item in items.filter(tab => !tab.pinned)"
             :key="item.id || item.to"
             ref="tab"
             :data="item"
-            :index="index"
+            :index="items.indexOf(item)"
             @contextmenu.native.prevent="
-              e => showContextmenu(item.id, item.pinned, index, e)
+              e => showContextmenu(item.id, item.pinned, items.indexOf(item), e)
             "
           />
         </transition-group>
