@@ -18,7 +18,9 @@ export default {
           close: 'Close This',
           closeLefts: 'Close to the Left',
           closeRights: 'Close to the Right',
-          closeOthers: 'Close Others'
+          closeOthers: 'Close Others',
+          pin: 'Pin',
+          unpin: 'Unpin'
         },
 
         msg: {

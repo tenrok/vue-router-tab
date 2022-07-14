@@ -5,7 +5,29 @@
       <div class="router-tab__slot-start">
         <slot name="start" />
       </div>
-
+      <div v-if="allowPin"></div>
+      <div class="router-tab__pinned">
+        <!-- 页签列表 -->
+        <transition-group
+          tag="ul"
+          class="router-tab__nav"
+          v-bind="tabTrans"
+          @after-enter="onTabTrans"
+          @after-leave="onTabTrans"
+        >
+          <tab-item
+            v-for="item in items.filter(tab => tab.pinned)"
+            :key="item.id || item.to"
+            ref="tab"
+            :data="item"
+            :index="items.indexOf(item)"
+            @contextmenu.native.prevent="
+              e => showContextmenu(item.id, item.pinned, items.indexOf(item), e)
+            "
+          />
+        </transition-group>
+      </div>
+      <slot v-if="allowPin" name="divider" />
       <tab-scroll ref="scroll">
         <!-- 页签列表 -->
         <transition-group
@@ -16,13 +38,13 @@
           @after-leave="onTabTrans"
         >
           <tab-item
-            v-for="(item, index) in items"
+            v-for="item in items.filter(tab => !tab.pinned)"
             :key="item.id || item.to"
             ref="tab"
             :data="item"
-            :index="index"
+            :index="items.indexOf(item)"
             @contextmenu.native.prevent="
-              e => showContextmenu(item.id, index, e, item.parentPath)
+              e => showContextmenu(item.id, item.pinned, items.indexOf(item), e)
             "
           />
         </transition-group>
@@ -71,6 +93,7 @@
         v-if="contextmenu !== false && contextData.index > -1"
         :data="contextData"
         :menu="contextMenu"
+        :menu-pinned="contextMenuPinned"
       />
     </transition>
   </div>
