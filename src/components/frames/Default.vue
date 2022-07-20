@@ -3,6 +3,8 @@
     :contextmenu="contextMenu"
     :contextmenu-pinned="contextMenuPinned"
     :on-drop-alive="onDropAlive"
+    :on-pin="onPinHandler"
+    :on-unpin="onUnpinHandler"
     use-inheritance
     :tabs="tabs"
     allow-pin
@@ -70,7 +72,15 @@ export default {
       ],
 
       onDropAlive(context) {
-        //console.log(context)
+        console.log(context)
+      },
+
+      onPinHandler(context) {
+        console.log('pin', context)
+      },
+
+      onUnpinHandler(context) {
+        console.log('unpin', context)
       }
     }
   }
