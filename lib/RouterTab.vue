@@ -5,29 +5,40 @@
       <div class="router-tab__slot-start">
         <slot name="start" />
       </div>
-      <div v-if="allowPin"></div>
-      <div class="router-tab__pinned">
-        <!-- 页签列表 -->
-        <transition-group
-          tag="ul"
-          class="router-tab__nav"
-          v-bind="tabTrans"
-          @after-enter="onTabTrans"
-          @after-leave="onTabTrans"
+      <div v-if="allowPin">
+        <div
+          :class="[
+            'router-tab__pinned',
+            {
+              'router-tab__pinned-alone': pinnedGroup.length === 1
+            }
+          ]"
         >
-          <tab-item
-            v-for="item in items.filter(tab => tab.pinned)"
-            :key="item.id || item.to"
-            ref="tab"
-            :data="item"
-            :index="items.indexOf(item)"
-            @contextmenu.native.prevent="
-              e => showContextmenu(item.id, item.pinned, items.indexOf(item), e)
-            "
-          />
-        </transition-group>
+          <!-- 页签列表 -->
+          <transition-group
+            tag="ul"
+            class="router-tab__nav"
+            v-bind="tabTrans"
+            @after-enter="onTabTrans"
+            @after-leave="onTabTrans"
+          >
+            <tab-item
+              v-for="item in pinnedGroup"
+              :key="item.id || item.to"
+              ref="tab"
+              :data="item"
+              :index="items.indexOf(item)"
+              @contextmenu.native.prevent="
+                e =>
+                  showContextmenu(item.id, item.pinned, items.indexOf(item), e)
+              "
+            />
+          </transition-group>
+        </div>
       </div>
-      <slot v-if="allowPin" name="divider" />
+      <transition name="router-tab__slot-divider_trans">
+        <slot v-if="allowPin && commonGroup.length > 0" name="divider" />
+      </transition>
       <tab-scroll ref="scroll">
         <!-- 页签列表 -->
         <transition-group
@@ -38,7 +49,7 @@
           @after-leave="onTabTrans"
         >
           <tab-item
-            v-for="item in items.filter(tab => !tab.pinned)"
+            v-for="item in commonGroup"
             :key="item.id || item.to"
             ref="tab"
             :data="item"

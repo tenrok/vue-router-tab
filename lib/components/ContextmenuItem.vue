@@ -18,7 +18,7 @@ import { mapGetters } from '../util'
 
 export default {
   name: 'ContextmenuItem',
-  inject: ['$tabs'],
+  inject: ['$tabs', '$oph', '$ouh'],
 
   props: {
     // 菜单数据
@@ -31,9 +31,9 @@ export default {
   computed: {
     // 参数
     context() {
-      const { $tabs, $parent: $menu } = this
+      const { $tabs, $oph, $ouh, $parent: $menu } = this
       const { target, data } = $menu
-      return { $tabs, $menu, target, data }
+      return { $tabs, $menu, target, data, $oph, $ouh }
     },
 
     // 从 this.data 提取计算属性

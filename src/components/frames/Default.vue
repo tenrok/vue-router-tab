@@ -3,9 +3,13 @@
     :contextmenu="contextMenu"
     :contextmenu-pinned="contextMenuPinned"
     :on-drop-alive="onDropAlive"
-    :use-inheritance="true"
+    :on-pin="onPinHandler"
+    :on-unpin="onUnpinHandler"
+    use-inheritance
     :tabs="tabs"
     allow-pin
+    :allow-close-pinned="false"
+    hide-title-pinned
     ><template #divider><div class="pin-divider"></div></template>
   </router-tab>
 </template>
@@ -61,25 +65,43 @@ export default {
           to: '/default/page/2',
           title: 'kavo',
           pinned: true,
+          nodrag: true,
           unpinnable: false,
           closable: false
         }
       ],
 
       onDropAlive(context) {
-        //console.log(context)
+        console.log(context)
+      },
+
+      onPinHandler(context) {
+        console.log('pin', context)
+      },
+
+      onUnpinHandler(context) {
+        console.log('unpin', context)
       }
     }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .pin-divider {
   top: 0;
   bottom: 0;
   background: grey;
   width: 3px;
   margin: 2px;
+}
+
+.router-tab__slot-divider_trans-enter-active,
+.router-tab__slot-divider_trans-leave-active {
+  transition: opacity 0.5s ease-in-out;
+}
+.router-tab__slot-divider_trans-enter-from,
+.router-tab__slot-divider_trans-leave-to {
+  opacity: 0;
 }
 </style>
