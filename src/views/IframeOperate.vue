@@ -1,18 +1,18 @@
 <template>
   <div>
-    <h3>Iframe 页签操作</h3>
+    <h3>Iframe Tab operations</h3>
 
     <p>
       <a class="demo-btn" @click="$tabs.openIframe(site.src, site.title, icon)">
-        打开“{{ site.title }}”
+        Open “{{ site.title }}”
       </a>
 
       <a class="demo-btn" @click="$tabs.refreshIframe(site.src)">
-        刷新“{{ site.title }}”
+        Refresh “{{ site.title }}”
       </a>
 
       <a class="demo-btn" @click="$tabs.closeIframe(site.src)">
-        关闭“{{ site.title }}”
+        Close “{{ site.title }}”
       </a>
     </p>
 
@@ -34,31 +34,33 @@
       </a>
     </p>
 
-    <h3>打开 Iframe 页签</h3>
+    <h3>Open the Iframe tab</h3>
 
     <div class="custom-iframe">
       <label>
-        名称：
-        <input v-model="iframe.title" name="title" placeholder="页签标题" />
+        Name：
+        <input v-model="iframe.title" name="title" placeholder="Tab title" />
       </label>
 
       <label>
-        网址：
-        <input v-model="iframe.src" name="src" placeholder="请输入完整的网址" />
+        URL：
+        <input
+          v-model="iframe.src"
+          name="src"
+          placeholder="Please enter full URL"
+        />
       </label>
 
       <a
         class="demo-btn primary"
         @click="iframe.src && $tabs.openIframe(iframe.src, iframe.title, icon)"
       >
-        打开页签
+        Open tab
       </a>
     </div>
 
     <template v-if="/^\/iframe\//.test($route.path)">
-      <h3 class="text-strong">
-        提示：
-      </h3>
+      <h3 class="text-strong">提示：</h3>
 
       <p>
         开启浏览器开发者工具的 console 页签，打开 Iframe 页签并查看

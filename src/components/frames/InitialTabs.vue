@@ -13,10 +13,14 @@ export default {
         '/initial-tabs/page-leave',
 
         // Nuxt 项目需要页签的展示的完整配置
-        { to: '/initial-tabs/tab-dynamic', title: '异步页签', closable: false },
+        {
+          to: '/initial-tabs/tab-dynamic',
+          title: 'Dynamic tab',
+          closable: false
+        },
 
         // 具有动态页签标题的页签，需要设置初始页签标题，避免进入页签后标题不一致
-        { to: '/initial-tabs/page/1', title: '页面1' },
+        { to: '/initial-tabs/page/1', title: 'Page1' },
 
         // <router-link> location 方式配置
         {
@@ -25,11 +29,11 @@ export default {
             query: { t: 2 }
           },
 
-          title: '页面2'
+          title: 'Page2'
         },
 
         // 默认 key 配置下，该页签与 '/initial-tabs/page/2' 页签的 key 一致，将只保留第一个出现的页签
-        { to: '/initial-tabs/page/2?t=1', title: '页面2-1' },
+        { to: '/initial-tabs/page/2?t=1', title: 'Page2-1' },
 
         // Iframe 页签
         `/initial-tabs/iframe/${encodeURIComponent(

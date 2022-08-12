@@ -18,10 +18,11 @@ import { mapGetters } from '../util'
 
 export default {
   name: 'ContextmenuItem',
-  inject: ['$tabs', '$oph', '$ouh'],
+
+  inject: ['$tabs', 'onTabEvent'],
 
   props: {
-    // 菜单数据
+    // Menu data
     data: {
       type: Object,
       required: true
@@ -31,9 +32,9 @@ export default {
   computed: {
     // 参数
     context() {
-      const { $tabs, $oph, $ouh, $parent: $menu } = this
+      const { $tabs, $parent: $menu, onTabEvent } = this
       const { target, data } = $menu
-      return { $tabs, $menu, target, data, $oph, $ouh }
+      return { $tabs, $menu, target, data, onTabEvent }
     },
 
     // 从 this.data 提取计算属性

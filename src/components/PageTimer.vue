@@ -1,11 +1,12 @@
 <template>
   <p>
-    你在 <strong class="text-strong">{{ pageTime }}</strong> 秒前打开本页面
+    You opened this page
+    <strong class="text-strong">{{ pageTime }}</strong> seconds ago
   </p>
 </template>
 
 <script>
-// 页面计时器
+// Page timer
 export default {
   name: 'PageTimer',
 
@@ -42,7 +43,7 @@ export default {
 
       this.clearPageTimer()
 
-      // 定时更新事件
+      // Scheduled update events
       this.pageTimer = setInterval(this.calcPageTime, 1000)
     },
 

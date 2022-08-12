@@ -2,15 +2,18 @@
   <router-tab
     :contextmenu="contextMenu"
     :contextmenu-pinned="contextMenuPinned"
-    :on-drop-alive="onDropAlive"
-    :on-pin="onPinHandler"
-    :on-unpin="onUnpinHandler"
     use-inheritance
     :tabs="tabs"
     allow-pin
     :allow-close-pinned="false"
     hide-title-pinned
-    ><template #divider><div class="pin-divider"></div></template>
+    @on-drop-alive="onDropAlive"
+    @on-pin="onPin"
+    @on-unpin="onUnpin"
+  >
+    <template #divider>
+      <div class="pin-divider"></div>
+    </template>
   </router-tab>
 </template>
 
@@ -27,36 +30,14 @@ export default {
         'closeLefts',
         'closeRights',
         'closeOthers',
-        'pin',
-        {
-          id: 'inWindow',
-          title: 'В новом окне',
-          icon: 'fas fa-external-link-alt',
-
-          handler(context) {
-            alert(context)
-          }
-        }
+        'pin'
       ],
 
       contextMenuPinned: [
         { id: 'refresh', icon: 'fas fa-sync-alt' },
         'refreshAll',
         { id: 'close', icon: 'fas fa-times' },
-        { id: 'unpin', icon: 'fa-solid fa-thumbtack' },
-        {
-          id: 'inWindow',
-          title: 'В новом окне',
-          icon: 'fas fa-external-link-alt',
-          enable(context) {
-            return /^\/document|manager|service\d*\//.test(context.data.id)
-          },
-
-          handler(context) {
-            context.$tabs.close(context.data.id)
-            context.target.$open(`/x${context.data.id}`)
-          }
-        }
+        { id: 'unpin', icon: 'fa-solid fa-thumbtack' }
       ],
 
       tabs: [
@@ -69,19 +50,21 @@ export default {
           unpinnable: false,
           closable: false
         }
-      ],
+      ]
+    }
+  },
 
-      onDropAlive(context) {
-        console.log(context)
-      },
+  methods: {
+    onDropAlive(context) {
+      console.log('on-drop-alive', context)
+    },
 
-      onPinHandler(context) {
-        console.log('pin', context)
-      },
+    onPin(context) {
+      console.log('on-pin', context)
+    },
 
-      onUnpinHandler(context) {
-        console.log('unpin', context)
-      }
+    onUnpin(context) {
+      console.log('on-unpin', context)
     }
   }
 }

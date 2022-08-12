@@ -28,7 +28,7 @@ export default {
           url: 'https://gitee.com/bhuh12/vue-router-tab'
         },
         {
-          label: '文档和API',
+          label: 'Documentation and API',
           icon: 'api',
           url: '/vue-router-tab/'
         },

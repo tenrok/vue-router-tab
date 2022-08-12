@@ -26,9 +26,9 @@ export default {
   },
 
   watch: {
-    // 路由切换
+    // Routing switch
     $route() {
-      // 关闭侧边栏
+      // Close sidebar
       this.sidebarOpen = false
     }
   }
@@ -36,10 +36,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$side-width: 200px;
+$side-width: 270px;
 $just-trans: all 0.2s ease-in-out;
 
-/* 布局 */
+/* Layout */
 .app-ct {
   display: flex;
   flex-direction: column;
@@ -103,7 +103,7 @@ $just-trans: all 0.2s ease-in-out;
   ::v-deep .router-tab {
     height: 100%;
 
-    // 路由页面
+    // Routing page
     &-page {
       padding: 15px;
       font-size: 14px;

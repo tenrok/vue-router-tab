@@ -1,60 +1,60 @@
 <template>
   <div>
-    <h2 @click="click">页面{{ pageId }}</h2>
+    <h2 @click="click">Page{{ pageId }}</h2>
 
     <page-timer />
 
-    <h3>页签操作</h3>
+    <h3>Tab operations</h3>
 
     <p>
       <router-link class="demo-btn" :to="nextId">
-        打开“页面{{ nextId }}”
+        Open “Page{{ nextId }}”
       </router-link>
 
       <a class="demo-btn" @click="$tabs.open(nextId, false, true, true)">
-        New page with parent link {{ nextId }}
+        New “Page{{ nextId }}” with parent link
       </a>
     </p>
 
     <p v-if="prevId > 0">
       <router-link class="demo-btn" :to="prevId">
-        打开“页面{{ prevId }}”
+        Open “Page{{ prevId }}”
       </router-link>
 
       <a class="demo-btn" @click="$tabs.open(prevId, false, true, true)">
-        全新打开“页面{{ prevId }}”
+        Open “Page{{ prevId }}”
       </a>
     </p>
 
     <p>
       <a class="demo-btn" @click="$router.push('../tab-dynamic')">
-        打开“动态更新页签”
+        Open the “Dynamic updates tab”
       </a>
 
       <a class="demo-btn" @click="$tabs.close('../tab-dynamic')">
-        关闭“动态更新页签”
+        Close the “Dynamic updates tab”
       </a>
     </p>
 
     <p>
-      <a class="demo-btn" @click="$tabs.refresh()">刷新当前页面</a>
+      <a class="demo-btn" @click="$tabs.refresh()">Refresh the current page</a>
 
-      <a class="demo-btn" @click="$tabs.close()">关闭当前页面</a>
+      <a class="demo-btn" @click="$tabs.close()">Close the current page</a>
 
       <a class="demo-btn" @click="$tabs.close(null, '../tab-dynamic')">
-        关闭当前并跳转
+        Close the current tab and go
       </a>
     </p>
 
     <p>
-      <a class="demo-btn" @click="$tabs.refreshAll()">刷新所有页面</a>
+      <a class="demo-btn" @click="$tabs.refreshAll()">Refresh all pages</a>
 
-      <a class="demo-btn" @click="$tabs.reset()">重置页签</a>
+      <a class="demo-btn" @click="$tabs.reset()">Reset tab</a>
     </p>
 
     <iframe-operate />
 
-    <h3>路由信息</h3>
+    <h3>Routing information</h3>
 
     <page-route-info />
   </div>
@@ -79,7 +79,7 @@ export default {
 
   methods: {
     click() {
-      //console.log(`页面${this.pageId}`)
+      //console.log(`Page${this.pageId}`)
     }
   }
 }

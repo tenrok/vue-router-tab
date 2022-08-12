@@ -1,12 +1,12 @@
 import { importPage } from '../utils'
 
-// 页面路由
+// Page routing
 export default () => [
   {
     path: 'page/:id',
     component: importPage('Page'),
     meta: {
-      title: route => `页面${route.params.id}`,
+      title: route => `Page${route.params.id}`,
       icon: 'rt-icon-doc',
       key: 'path'
     }
@@ -19,7 +19,7 @@ export default () => [
     path: 'no-cache/:id',
     component: importPage('Page'),
     meta: {
-      title: route => `无缓存页面${route.params.id}`,
+      title: route => `No cache page ${route.params.id}`,
       keepAlive: false,
       icon: 'rt-icon-doc',
       key: 'path'
@@ -37,7 +37,8 @@ export default () => [
     path: 'rule/default/:catalog/:type',
     component: importPage('Rule'),
     meta: {
-      title: route => `规则:默认-${route.params.catalog}/${route.params.type}`,
+      title: route =>
+        `Rule:default-${route.params.catalog}/${route.params.type}`,
       icon: 'rt-icon-log'
     }
   },
@@ -49,7 +50,7 @@ export default () => [
     path: 'rule/path/:catalog/:type',
     component: importPage('Rule'),
     meta: {
-      title: route => `规则:path-${route.params.catalog}/${route.params.type}`,
+      title: route => `Rule:path-${route.params.catalog}/${route.params.type}`,
       icon: 'rt-icon-log',
       key: 'path'
     }
@@ -63,7 +64,7 @@ export default () => [
     component: importPage('Rule'),
     meta: {
       title: route =>
-        `规则:fullPath-${route.params.catalog}/${route.params.type}`,
+        `Rule:fullPath-${route.params.catalog}/${route.params.type}`,
       icon: 'rt-icon-log',
       key: 'fullPath'
     }
@@ -77,7 +78,7 @@ export default () => [
     component: importPage('Rule'),
     meta: {
       title: route =>
-        `规则:自定义-${route.params.catalog}/${route.params.type}`,
+        `Rule:custom-${route.params.catalog}/${route.params.type}`,
       icon: 'rt-icon-log',
       key: route => '/rule/custom/' + route.params.catalog
     }
@@ -86,7 +87,7 @@ export default () => [
     path: 'tab-dynamic',
     component: importPage('TabDynamic'),
     meta: {
-      title: '动态页签',
+      title: 'Dynamic tab',
       icon: 'rt-icon-log'
     }
   },
@@ -94,7 +95,7 @@ export default () => [
     path: 'page-leave',
     component: importPage('PageLeave'),
     meta: {
-      title: '页面离开确认',
+      title: 'Confirmation of leaving the page',
       icon: 'rt-icon-contact'
     }
   },
@@ -105,7 +106,7 @@ export default () => [
       return route.fullPath + '/page1'
     },
     meta: {
-      title: '嵌套路由',
+      title: 'Nested routes',
       icon: 'rt-icon-doc'
     },
     children: [

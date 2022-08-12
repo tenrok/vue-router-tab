@@ -1,29 +1,29 @@
 <template>
   <div>
-    <h2>动态页签</h2>
+    <h2>Dynamic tab</h2>
 
     <div class="form-item">
       <label>
-        <p>修改页签标题</p>
+        <p>Modify tab title</p>
         <input v-model="routeTab.title" type="text" />
       </label>
     </div>
 
     <div class="form-item">
       <label>
-        <p>修改页签提示</p>
+        <p>Modify tab tips</p>
         <input v-model="routeTab.tips" type="text" />
       </label>
     </div>
 
     <div class="form-item tab-icons">
-      <p>切换图标</p>
+      <p>Toggle icon</p>
       <a
         v-for="icon in icons"
         :key="icon"
         class="tab-icon"
         :class="`${icon === routeTab.icon ? 'is-active' : ''} ${icon}`"
-        title="设置页签图标"
+        title="Set tab icon"
         @click="routeTab.icon = icon"
       />
     </div>
@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       routeTab: {
-        title: '动态页签',
+        title: 'Dynamic tab',
         icon: 'rt-icon-log',
         tips: ''
       },

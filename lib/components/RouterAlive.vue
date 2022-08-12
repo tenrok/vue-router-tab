@@ -59,7 +59,9 @@ const TRANSFER_PREFIX = 'RouterTabDragSortIndex:'
  */
 export default {
   name: 'RouterAlive',
-  inject: ['$dah'],
+
+  inject: ['onTabEvent'],
+
   provide() {
     // 提供实例给子组件调用
     return {
@@ -109,7 +111,7 @@ export default {
     this.cache = {}
 
     return {
-      // 路由匹配信息
+      // Route matching information
       routeMatch: new RouteMatch(this),
 
       // 页面路由索引
@@ -147,10 +149,10 @@ export default {
   },
 
   watch: {
-    // 监听路由
+    // Watch route
     $route: {
       handler($route, old) {
-        // 组件就绪
+        // Component ready
         if (!old) this.$emit('ready', this)
 
         if (!$route.matched.length) return
@@ -163,7 +165,7 @@ export default {
           vm: cacheVM
         } = cacheItem
 
-        // 不复用且路由改变则清理组件缓存
+        // If it is not reused and the route changes, the component cache is cleaned up
         if (cacheAlivePath && !reusable && cacheAlivePath !== alivePath) {
           cacheAlivePath = ''
           this.refresh(key)
@@ -218,9 +220,8 @@ export default {
 
       const fromIndex = raw.replace(TRANSFER_PREFIX, '')
       const tab = items[fromIndex]
-      //console.log(this.$contextMenu, tab)
-      //console.log(e)
-      this.$dah && this.$dah({ $tabs: this.$tabs, data: tab })
+
+      this.onTabEvent('drop-alive', { $tabs: this.$tabs, data: tab })
     },
 
     // 获取页面路由索引
@@ -358,7 +359,7 @@ export default {
       }
     },
 
-    // 匹配路由信息
+    // Match routing information
     matchRoute($route) {
       const matched = this._match
 
@@ -379,13 +380,13 @@ export default {
       return (this._match = new RouteMatch(this, $route))
     },
 
-    // 检测热重载
+    // Detect hot reload
     checkHotReloading() {
       const pageVm = this.$refs.page
       const lastCid = pageVm._lastCtorId
       const cid = (pageVm._lastCtorId = getCtorId(pageVm))
 
-      // 热重载更新
+      // Hot reload update
       if (lastCid && lastCid !== cid) {
         this.refresh()
         return true
