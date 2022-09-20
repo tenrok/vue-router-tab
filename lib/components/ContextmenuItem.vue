@@ -30,7 +30,7 @@ export default {
   },
 
   computed: {
-    // 参数
+    // Parameters
     context() {
       const { $tabs, $parent: $menu, onTabEvent } = this
       const { target, data } = $menu

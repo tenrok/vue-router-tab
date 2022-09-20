@@ -1,6 +1,6 @@
 {
   "name": "@tenrok/vue-router-tab",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "Vue.js tab components, based on Vue Router",
   "keywords": [
     "vue-router-tab",
@@ -39,7 +39,7 @@
     "changelog": "conventional-changelog -p angular -i docs/zh/guide/changelog.md -s"
   },
   "dependencies": {
-    "vue": "^2.7.8",
+    "vue": "^2.7.10",
     "vue-router": "^3.2.0"
   },
   "devDependencies": {
@@ -66,8 +66,8 @@
     "stylelint-config-recommended": "^5.0.0",
     "stylelint-order": "^4.1.0",
     "stylelint-scss": "^3.19.0",
-    "vue-template-compiler": "^2.7.8",
-    "vuepress": "^1.5.2"
+    "vue-template-compiler": "^2.7.10",
+    "vuepress": "^1.9.7"
   },
   "gitHooks": {
     "pre-commit": "lint-staged",

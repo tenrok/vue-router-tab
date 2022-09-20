@@ -21,7 +21,9 @@ import menuMap, { defaultMenu, defaultMenuPinned } from '../config/contextmenu'
 
 export default {
   name: 'TabContextmenu',
+
   components: { TabContextmenuItem },
+
   inject: ['$tabs'],
 
   props: {
@@ -30,7 +32,7 @@ export default {
       type: [Boolean, Object]
     },
 
-    // 菜单配置
+    // Menu configuration
     menu: {
       type: Array,
       default: () => defaultMenu

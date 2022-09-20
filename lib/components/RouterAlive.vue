@@ -43,7 +43,7 @@
 import { remove, mapGetters, getTransOpt, getCtorId } from '../util'
 import RouteMatch from '../util/RouteMatch'
 
-// 页面监听钩子
+// Page listener hook
 const PAGE_HOOKS = [
   'created',
   'mounted',
@@ -55,7 +55,7 @@ const PAGE_HOOKS = [
 const TRANSFER_PREFIX = 'RouterTabDragSortIndex:'
 
 /**
- * 路由缓存控件
+ * Route cache control
  */
 export default {
   name: 'RouterAlive',
@@ -63,7 +63,7 @@ export default {
   inject: ['onTabEvent'],
 
   provide() {
-    // 提供实例给子组件调用
+    // Provide an instance to the child component to call
     return {
       RouterAlive: this
     }
@@ -171,7 +171,7 @@ export default {
           this.refresh(key)
         }
 
-        // 嵌套路由，地址跟缓存不一致
+        // Nested routing, the address is inconsistent with the cache
         if (nest && cacheVM && $route.fullPath !== cacheFullPath) {
           const oldKey = this.matchRoute(old).key
           if (oldKey !== key) {
@@ -179,12 +179,12 @@ export default {
           }
         }
 
-        // 类型：更新或者新建缓存
+        // Type: update or new cache
         const type = cacheAlivePath ? 'update' : 'create'
 
         this.$emit('change', type, this.routeMatch)
 
-        // 更新缓存路径
+        // Update cache path
         if (alive) {
           cacheItem.fullPath = $route.fullPath
         }

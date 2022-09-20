@@ -74,9 +74,9 @@ export default {
 .pin-divider {
   top: 0;
   bottom: 0;
-  background: grey;
   width: 3px;
   margin: 2px;
+  background: grey;
 }
 
 .router-tab__slot-divider_trans-enter-active,
