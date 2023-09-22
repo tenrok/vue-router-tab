@@ -37,22 +37,13 @@
 
     <ul class="btn-list">
       <li v-for="cat in catalogs" :key="cat">
-        <router-link
-          v-for="t in types"
-          :key="t"
-          class="demo-btn link"
-          :to="`../${cat}/${t}`"
-        >
+        <router-link v-for="t in types" :key="t" class="demo-btn link" :to="`../${cat}/${t}`">
           {{ cat }}/{{ t }}
         </router-link>
 
-        <router-link class="demo-btn link" :to="`../${cat}/1?q=abc`">
-          {{ cat }}/1?q=abc
-        </router-link>
+        <router-link class="demo-btn link" :to="`../${cat}/1?q=abc`"> {{ cat }}/1?q=abc </router-link>
 
-        <router-link class="demo-btn link" :to="`../${cat}/1?q=def`">
-          {{ cat }}/1?q=def
-        </router-link>
+        <router-link class="demo-btn link" :to="`../${cat}/1?q=def`"> {{ cat }}/1?q=def </router-link>
       </li>
     </ul>
 
@@ -68,7 +59,9 @@ import PageRouteInfo from '../components/PageRouteInfo'
 
 export default {
   name: 'Rule',
+
   components: { PageTimer, PageRouteInfo },
+
   data() {
     let route = this.$route
     let { catalog, type } = route.params

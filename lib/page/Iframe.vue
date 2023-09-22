@@ -13,7 +13,9 @@ export const iframeMeta = {
 // Iframe 页签页面
 export default {
   name: 'Iframe',
+
   inject: ['$tabs'],
+
   meta: iframeMeta, // Nuxt 页面路由元
 
   props: {
@@ -31,20 +33,27 @@ export default {
     url() {
       let src = decodeURIComponent(this.src)
 
-      // Check in allow list
-      if (this.$tabs.allowList.length > 0) {
-        try {
-          const u = new URL(src)
-          if (!this.$tabs.allowList.includes(u.hostname)) {
-            return 'about:blank'
-          }
-        } catch (_) {
-          return 'about:blank'
-        }
-      }
-
       if (/^(javascript|data):/i.test(src)) {
         return 'about:blank'
+      }
+
+      // Checking src in the allowlist
+      if (this.$tabs.allowList.length > 0) {
+        if (
+          !this.$tabs.allowList.some(v => {
+            let re
+            if (/^\/.*\/([gimy]*)$/.test(v)) {
+              const flags = v.replace(/.*\/([gimy]*)$/, '$1')
+              const pattern = v.replace(new RegExp('^/(.*?)/' + flags + '$'), '$1')
+              re = new RegExp(pattern, flags)
+            } else {
+              re = new RegExp(v)
+            }
+            return re.test(src)
+          })
+        ) {
+          return 'about:blank'
+        }
       }
 
       return src

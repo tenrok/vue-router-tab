@@ -9,14 +9,14 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint',
     ecmaFeatures: {
-      // 支持装饰器
+      // Supports decorators
       legacyDecorators: true
     }
   },
-  // ESlint 规则：https://eslint.org/docs/rules/
-  // Vue 规则：https://eslint.vuejs.org/rules/
+  // ESlint rules：https://eslint.org/docs/rules/
+  // Vue rules：https://eslint.vuejs.org/rules/
   rules: {
-    'no-console': 'off',
+    // 'no-console': 'off',
     'no-debugger': isProd ? 'warn' : 'off',
     'no-unused-vars': 'warn',
     'no-empty': ['error', { allowEmptyCatch: true }],

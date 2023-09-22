@@ -7,33 +7,21 @@
     <h3>Tab operations</h3>
 
     <p>
-      <router-link class="demo-btn" :to="nextId">
-        Open “Page{{ nextId }}”
-      </router-link>
+      <router-link class="demo-btn" :to="nextId">Open “Page{{ nextId }}”</router-link>
 
-      <a class="demo-btn" @click="$tabs.open(nextId, false, true, true)">
-        New “Page{{ nextId }}” with parent link
-      </a>
+      <a class="demo-btn" @click="$tabs.open(nextId, false, true, true)">New “Page{{ nextId }}” with parent link</a>
     </p>
 
     <p v-if="prevId > 0">
-      <router-link class="demo-btn" :to="prevId">
-        Open “Page{{ prevId }}”
-      </router-link>
+      <router-link class="demo-btn" :to="prevId">Open “Page{{ prevId }}”</router-link>
 
-      <a class="demo-btn" @click="$tabs.open(prevId, false, true, true)">
-        Open “Page{{ prevId }}”
-      </a>
+      <a class="demo-btn" @click="$tabs.open(prevId, false, true, true)">Open “Page{{ prevId }}”</a>
     </p>
 
     <p>
-      <a class="demo-btn" @click="$router.push('../tab-dynamic')">
-        Open the “Dynamic updates tab”
-      </a>
+      <a class="demo-btn" @click="$router.push('../tab-dynamic')">Open the “Dynamic updates tab”</a>
 
-      <a class="demo-btn" @click="$tabs.close('../tab-dynamic')">
-        Close the “Dynamic updates tab”
-      </a>
+      <a class="demo-btn" @click="$tabs.close('../tab-dynamic')">Close the “Dynamic updates tab”</a>
     </p>
 
     <p>
@@ -41,9 +29,7 @@
 
       <a class="demo-btn" @click="$tabs.close()">Close the current page</a>
 
-      <a class="demo-btn" @click="$tabs.close(null, '../tab-dynamic')">
-        Close the current tab and go
-      </a>
+      <a class="demo-btn" @click="$tabs.close(null, '../tab-dynamic')">Close the current tab and go</a>
     </p>
 
     <p>
@@ -67,7 +53,9 @@ import IframeOperate from './IframeOperate'
 
 export default {
   name: 'Page',
+
   components: { PageTimer, PageRouteInfo, IframeOperate },
+
   data() {
     let id = this.$route.params.id
     return {
@@ -79,7 +67,8 @@ export default {
 
   methods: {
     click() {
-      //console.log(`Page${this.pageId}`)
+      // eslint-disable no-console
+      console.log(`Page${this.pageId}`)
     }
   }
 }

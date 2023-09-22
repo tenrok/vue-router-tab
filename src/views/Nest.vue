@@ -7,12 +7,8 @@
 
     <div class="content">
       <nav class="nav">
-        <router-link to="./page1">
-          页面1
-        </router-link>
-        <router-link to="./page2">
-          页面2
-        </router-link>
+        <router-link to="./page1">页面1</router-link>
+        <router-link to="./page2">页面2</router-link>
       </nav>
       <keep-alive>
         <router-view class="page" />

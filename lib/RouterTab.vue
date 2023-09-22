@@ -6,14 +6,7 @@
         <slot name="start" />
       </div>
       <div v-if="allowPin">
-        <div
-          :class="[
-            'router-tab__pinned',
-            {
-              'router-tab__pinned-alone': pinnedGroup.length === 1
-            }
-          ]"
-        >
+        <div :class="['router-tab__pinned', { 'router-tab__pinned-alone': pinnedGroup.length === 1 }]">
           <!-- 页签列表 -->
           <transition-group
             tag="ul"
@@ -28,10 +21,7 @@
               ref="tab"
               :data="item"
               :index="items.indexOf(item)"
-              @contextmenu.native.prevent="
-                e =>
-                  showContextmenu(item.id, item.pinned, items.indexOf(item), e)
-              "
+              @contextmenu.native.prevent="e => showContextmenu(item.id, item.pinned, items.indexOf(item), e)"
             />
           </transition-group>
         </div>
@@ -54,9 +44,7 @@
             ref="tab"
             :data="item"
             :index="items.indexOf(item)"
-            @contextmenu.native.prevent="
-              e => showContextmenu(item.id, item.pinned, items.indexOf(item), e)
-            "
+            @contextmenu.native.prevent="e => showContextmenu(item.id, item.pinned, items.indexOf(item), e)"
           />
         </transition-group>
       </tab-scroll>
@@ -80,11 +68,7 @@
       />
 
       <!-- iframe 页面 -->
-      <transition-group
-        v-bind="pageTrans"
-        tag="div"
-        class="router-tab__iframes"
-      >
+      <transition-group v-bind="pageTrans" tag="div" class="router-tab__iframes">
         <iframe
           v-for="url in iframes"
           v-show="url === currentIframe"

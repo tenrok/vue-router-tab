@@ -1,8 +1,5 @@
 <template>
-  <router-tab
-    :class="{ 'is-fullscreen': fullscreen }"
-    :contextmenu="contextmenu"
-  />
+  <router-tab :class="{ 'is-fullscreen': fullscreen }" :contextmenu="contextmenu" />
 </template>
 
 <script>
@@ -62,8 +59,7 @@ export default {
         {
           id: 'fullscreen',
           title: () => (this.fullscreen ? '退出全屏' : '全屏'),
-          icon: () =>
-            this.fullscreen ? 'rt-icon-fullscreen-exit' : 'rt-icon-fullscreen',
+          icon: () => (this.fullscreen ? 'rt-icon-fullscreen-exit' : 'rt-icon-fullscreen'),
 
           // 点击触发
           handler: () =>

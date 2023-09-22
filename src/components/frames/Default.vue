@@ -12,7 +12,7 @@
     @on-unpin="onUnpin"
   >
     <template #divider>
-      <div class="pin-divider"></div>
+      <div class="pin-divider" />
     </template>
   </router-tab>
 </template>

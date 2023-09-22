@@ -1,23 +1,15 @@
 /**
- * stylelint 配置
+ * stylelint configuration
  * stylelint: https://stylelint.io/user-guide/rules/list
  * stylelint-scss: https://github.com/kristerkari/stylelint-scss
  * stylelint-config-rational-order: https://github.com/constverum/stylelint-config-rational-order
  */
 
 module.exports = {
-  extends: [
-    'stylelint-config-recommended',
-    'stylelint-config-rational-order',
-    'stylelint-config-prettier'
-  ],
-  plugins: [
-    'stylelint-scss',
-    'stylelint-order',
-    'stylelint-config-rational-order/plugin'
-  ],
+  extends: ['stylelint-config-recommended', 'stylelint-config-rational-order', 'stylelint-config-prettier'],
+  plugins: ['stylelint-scss', 'stylelint-order', 'stylelint-config-rational-order/plugin'],
   rules: {
-    // 伪元素
+    // Pseudo element
     'selector-pseudo-element-no-unknown': [
       true,
       {
@@ -25,7 +17,7 @@ module.exports = {
       }
     ],
 
-    // 通用字体
+    // Common font
     'font-family-no-missing-generic-family-keyword': [
       true,
       {

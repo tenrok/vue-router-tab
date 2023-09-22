@@ -36,9 +36,7 @@ export default {
         { to: '/initial-tabs/page/2?t=1', title: 'Page2-1' },
 
         // Iframe tab
-        `/initial-tabs/iframe/${encodeURIComponent(
-          'https://cn.vuejs.org'
-        )}/Vue.js/rt-icon-web`
+        `/initial-tabs/iframe/${encodeURIComponent('https://cn.vuejs.org')}/Vue.js/rt-icon-web`
       ]
     }
   }

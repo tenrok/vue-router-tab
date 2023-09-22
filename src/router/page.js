@@ -37,8 +37,7 @@ export default () => [
     path: 'rule/default/:catalog/:type',
     component: importPage('Rule'),
     meta: {
-      title: route =>
-        `Rule:default-${route.params.catalog}/${route.params.type}`,
+      title: route => `Rule:default-${route.params.catalog}/${route.params.type}`,
       icon: 'rt-icon-log'
     }
   },
@@ -63,8 +62,7 @@ export default () => [
     path: 'rule/fullPath/:catalog/:type',
     component: importPage('Rule'),
     meta: {
-      title: route =>
-        `Rule:fullPath-${route.params.catalog}/${route.params.type}`,
+      title: route => `Rule:fullPath-${route.params.catalog}/${route.params.type}`,
       icon: 'rt-icon-log',
       key: 'fullPath'
     }
@@ -77,8 +75,7 @@ export default () => [
     path: 'rule/custom/:catalog/:type',
     component: importPage('Rule'),
     meta: {
-      title: route =>
-        `Rule:custom-${route.params.catalog}/${route.params.type}`,
+      title: route => `Rule:custom-${route.params.catalog}/${route.params.type}`,
       icon: 'rt-icon-log',
       key: route => '/rule/custom/' + route.params.catalog
     }

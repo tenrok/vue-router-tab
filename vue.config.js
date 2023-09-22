@@ -1,25 +1,22 @@
-// 构建目标是否为库
-const isBuildLib =
-  (process.env.npm_lifecycle_script || '').indexOf('--target lib') > 0
+// Whether the build target is a library
+const isBuildLib = (process.env.npm_lifecycle_script || '').indexOf('--target lib') > 0
 
 module.exports = {
-  publicPath: '', // 相对路径
+  publicPath: '', // Relative path
 
   outputDir: isBuildLib ? 'dist/lib' : 'dist/docs/demo',
 
-  // webpack 链式配置
+  // webpack chain configuration
   chainWebpack: config => {
-    // 移除 prefetch 插件
+    // Remove prefetch plugin
     config.plugins.delete('prefetch')
   },
 
   css: {
     loaderOptions: {
       sass: {
-        // scss公共变量
-        prependData: isBuildLib
-          ? undefined
-          : `@use "src/assets/scss/variables.scss" as *;`
+        // scss public variables
+        prependData: isBuildLib ? undefined : `@use "src/assets/scss/variables.scss" as *;`
       }
     }
   }

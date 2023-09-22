@@ -3,17 +3,9 @@
     <h3>Iframe Tab operations</h3>
 
     <p>
-      <a class="demo-btn" @click="$tabs.openIframe(site.src, site.title, icon)">
-        Open “{{ site.title }}”
-      </a>
-
-      <a class="demo-btn" @click="$tabs.refreshIframe(site.src)">
-        Refresh “{{ site.title }}”
-      </a>
-
-      <a class="demo-btn" @click="$tabs.closeIframe(site.src)">
-        Close “{{ site.title }}”
-      </a>
+      <a class="demo-btn" @click="$tabs.openIframe(site.src, site.title, icon)">Open "{{ site.title }}"</a>
+      <a class="demo-btn" @click="$tabs.refreshIframe(site.src)">Refresh "{{ site.title }}"</a>
+      <a class="demo-btn" @click="$tabs.closeIframe(site.src)">Close "{{ site.title }}"</a>
     </p>
 
     <p>
@@ -37,34 +29,15 @@
     <h3>Open the Iframe tab</h3>
 
     <div class="custom-iframe">
-      <label>
-        Name：
-        <input v-model="iframe.title" name="title" placeholder="Tab title" />
-      </label>
-
-      <label>
-        URL：
-        <input
-          v-model="iframe.src"
-          name="src"
-          placeholder="Please enter full URL"
-        />
-      </label>
-
-      <a
-        class="demo-btn primary"
-        @click="iframe.src && $tabs.openIframe(iframe.src, iframe.title, icon)"
-      >
-        Open tab
-      </a>
+      <label>Name: <input v-model="iframe.title" name="title" placeholder="Tab title" /></label>
+      <label>URL: <input v-model="iframe.src" name="src" placeholder="Please enter full URL" /></label>
+      <a class="demo-btn primary" @click="iframe.src && $tabs.openIframe(iframe.src, iframe.title, icon)">Open tab</a>
     </div>
 
     <template v-if="/^\/iframe\//.test($route.path)">
-      <h3 class="text-strong">Hint：</h3>
-
+      <h3 class="text-strong">Hint:</h3>
       <p>
-        Open the console tab of the browser developer tools, open the Iframe tab
-        and view
+        Open the console tab of the browser developer tools, open the Iframe tab and view
         <code>iframe-mounted</code>
         and
         <code>iframe-loaded</code>
@@ -77,6 +50,7 @@
 <script>
 export default {
   name: 'IframeOperate',
+
   data() {
     return {
       icon: 'rt-icon-web',
@@ -93,9 +67,7 @@ export default {
 
       xss: {
         js: 'javascript:alert(1)',
-        base64:
-          'data:text/html;base64,' +
-          window.btoa('<script>alert(1)</s' + 'cript>')
+        base64: 'data:text/html;base64,' + window.btoa('<script>alert(1)</s' + 'cript>')
       }
     }
   }

@@ -33,9 +33,7 @@ const routes = [
 
       if (match) {
         const base = match[1]
-        const matchParent = $router.options.routes.find(
-          item => item.path === base
-        )
+        const matchParent = $router.options.routes.find(item => item.path === base)
 
         // Subroutes 404
         if (matchParent) return base + '404'

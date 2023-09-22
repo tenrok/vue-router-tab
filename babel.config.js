@@ -1,4 +1,4 @@
-// 构建目标是否为库
+// Whether the build target is a library
 const isBuildLib = process.env.VUE_CLI_BUILD_TARGET === 'lib'
 
 module.exports = {

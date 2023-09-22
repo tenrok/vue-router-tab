@@ -1,17 +1,9 @@
 <template>
   <div
-    class="router-tab__contextmenu"
-    :class="{ 'has-icon': hasIcon }"
-    :style="{
-      left: `${data.left}px`,
-      top: `${data.top}px`
-    }"
+    :class="['router-tab__contextmenu', { 'has-icon': hasIcon }]"
+    :style="{ left: `${data.left}px`, top: `${data.top}px` }"
   >
-    <tab-contextmenu-item
-      v-for="item in menuList"
-      :key="item.id"
-      :data="item"
-    />
+    <tab-contextmenu-item v-for="item in menuList" :key="item.id" :data="item" />
   </div>
 </template>
 
@@ -52,7 +44,6 @@ export default {
 
     // 菜单选项
     menuList() {
-      //console.log(this.data)
       return (this.data.pinned ? this.menuPinned : this.menu)
         .map(item => {
           if (typeof item === 'string') {

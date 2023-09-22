@@ -1,8 +1,10 @@
 module.exports = {
+  arrowParens: 'avoid',
+  // endOfLine: 'auto',
+  eslintIntegration: true,
+  printWidth: 120,
   semi: false,
   singleQuote: true,
-  eslintIntegration: true,
-  arrowParens: 'avoid',
   trailingComma: 'none',
-  endOfLine: 'auto'
+  useTabs: false
 }

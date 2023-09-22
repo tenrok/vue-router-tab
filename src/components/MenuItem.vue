@@ -8,11 +8,7 @@
       {{ data.text }}
     </h3>
     <div class="menu-list">
-      <menu-item
-        v-for="(item, index) in data.children"
-        :key="index"
-        :data="item"
-      />
+      <menu-item v-for="(item, index) in data.children" :key="index" :data="item" />
     </div>
   </div>
 </template>

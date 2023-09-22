@@ -1,9 +1,7 @@
 <template>
   <table class="demo-table">
     <tr>
-      <th width="80">
-        name
-      </th>
+      <th width="80">name</th>
       <td>{{ $route.name }}</td>
     </tr>
     <tr>

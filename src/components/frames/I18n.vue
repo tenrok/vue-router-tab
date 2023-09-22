@@ -23,11 +23,7 @@ export default {
         }
       },
 
-      tabs: [
-        '/i18n/lang',
-        { to: '/i18n/page/1', title: ['page', 1] },
-        { to: '/i18n/page/2', title: ['page', 2] }
-      ]
+      tabs: ['/i18n/lang', { to: '/i18n/page/1', title: ['page', 1] }, { to: '/i18n/page/2', title: ['page', 2] }]
     }
   },
 
