@@ -31,6 +31,18 @@ export default {
     url() {
       let src = decodeURIComponent(this.src)
 
+      // Check in allow list
+      if (this.$tabs.allowList.length > 0) {
+        try {
+          const u = new URL(src)
+          if (!this.$tabs.allowList.includes(u.hostname)) {
+            return 'about:blank'
+          }
+        } catch (_) {
+          return 'about:blank'
+        }
+      }
+
       if (/^(javascript|data):/i.test(src)) {
         return 'about:blank'
       }

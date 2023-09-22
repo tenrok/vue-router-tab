@@ -19,7 +19,7 @@
     <p>
       <a
         class="demo-btn"
-        title="XSS 跨站链接的 iframe 将展示空白页面"
+        title="XSS cross-site linked iframe will display a blank page"
         @click="$tabs.openIframe(xss.js, 'XSS - JS', icon)"
       >
         XSS - JS
@@ -27,7 +27,7 @@
 
       <a
         class="demo-btn"
-        title="XSS 跨站链接的 iframe 将展示空白页面"
+        title="XSS cross-site linked iframe will display a blank page"
         @click="$tabs.openIframe(xss.base64, 'XSS - Base64', icon)"
       >
         XSS - Base64
@@ -60,14 +60,15 @@
     </div>
 
     <template v-if="/^\/iframe\//.test($route.path)">
-      <h3 class="text-strong">提示：</h3>
+      <h3 class="text-strong">Hint：</h3>
 
       <p>
-        开启浏览器开发者工具的 console 页签，打开 Iframe 页签并查看
+        Open the console tab of the browser developer tools, open the Iframe tab
+        and view
         <code>iframe-mounted</code>
-        和
+        and
         <code>iframe-loaded</code>
-        事件的参数打印
+        event parameter printing
       </p>
     </template>
   </div>

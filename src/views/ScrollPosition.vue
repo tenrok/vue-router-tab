@@ -1,15 +1,15 @@
 <template>
   <div class="scroll-page">
     <div class="custom-scroller">
-      <div v-if="loading" class="page-loading">加载中...</div>
+      <div v-if="loading" class="page-loading">Loading...</div>
       <p v-for="(item, index) in list" :key="index">
-        这里是滚动内容的第 <strong>{{ index + 1 }}</strong> 行
+        Here is the scrolling content <strong>{{ index + 1 }}</strong> OK
       </p>
     </div>
 
     <div v-if="multi" class="custom-scroller-1">
       <p v-for="(item, index) in list" :key="index">
-        这里是滚动内容的第 <strong>{{ index + 1 }}</strong> 行
+        Here is the scrolling content <strong>{{ index + 1 }}</strong> OK
       </p>
     </div>
   </div>

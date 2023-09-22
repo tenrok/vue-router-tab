@@ -12,7 +12,7 @@ export default {
     setTimeout(() => {
       this.list = new Array(100)
       this.loading = false
-      // 异步加载数据的页面需要在数据加载成功后抛出事件“page-loaded”
+      // Pages that load data asynchronously need to throw an event "page-loaded" after the data is loaded successfully.
       this.$emit('page-loaded')
     }, Math.random() * 1000)
   }

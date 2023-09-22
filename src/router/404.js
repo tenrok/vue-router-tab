@@ -1,11 +1,11 @@
 import { importPage } from '../utils'
 
-// 404 路由
+// 404 routing
 export default {
   path: '404',
   component: importPage('404'),
   meta: {
-    title: '找不到页面',
+    title: 'Page not found',
     icon: 'rt-icon-warning'
   }
 }

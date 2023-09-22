@@ -6,26 +6,26 @@ import route404 from './404'
 
 Vue.use(Router)
 
-// 全局 404 路由
+// Global 404 routing
 const globalRoute404 = {
   ...route404,
   path: '/404'
 }
 
-// 路由
+// Routing
 const routes = [
   {
     path: '/',
     redirect: '/default/page/1'
   },
 
-  // 框架子路由
+  // Frame sub-routing
   ...frameRoutes,
 
-  // 根路由 404
+  // Root route 404
   globalRoute404,
 
-  // 未匹配的路由 404
+  // Unmatched route 404
   {
     path: '*',
     redirect(to) {
@@ -37,17 +37,17 @@ const routes = [
           item => item.path === base
         )
 
-        // 子路由 404
+        // Subroutes 404
         if (matchParent) return base + '404'
       }
 
-      // 根路由 404
+      // Root route 404
       return '/404'
     }
   }
 ]
 
-// Vue Router 实例
+// Vue Router Example
 const $router = new Router({ routes })
 
 export default $router

@@ -2,13 +2,13 @@ import { importPage } from '../utils'
 import extendRoutes from '../utils/extendRoutes'
 import getPageRoutes from './page'
 
-// PascalCase 转 kebab-case
+// PascalCase to kebab-case
 const pascal2Kebab = str =>
   str
     .replace(/([a-z])([A-Z])/g, ($, $1, $2) => $1 + '-' + $2.toLowerCase())
     .replace(/^([A-Z])/, ($, $1) => $1.toLowerCase())
 
-// 需要自定义的框架路由
+// Need custom framework routing
 const frameRoutes = {
   Reuse: {
     redirect: 'rule/default/'
@@ -21,7 +21,7 @@ const frameRoutes = {
         path: 'operate',
         component: importPage('IframeOperate'),
         meta: {
-          title: 'Iframe 页签'
+          title: 'Iframe tab'
         }
       }
     ]
@@ -56,7 +56,7 @@ const frameRoutes = {
         path: 'page/:id',
         component: importPage('Page'),
         meta: {
-          title: route => `页面外部滚动${route.params.id}`,
+          title: route => `Page external scrolling ${route.params.id}`,
           icon: 'rt-icon-doc',
           key: 'path'
         }
@@ -65,7 +65,7 @@ const frameRoutes = {
         path: 'scroll-position',
         component: importPage('ScrollPosition'),
         meta: {
-          title: '页面内部滚动',
+          title: 'Scroll inside page',
           icon: 'rt-icon-doc'
         }
       },
@@ -73,7 +73,7 @@ const frameRoutes = {
         path: 'scroll-multi',
         component: importPage('ScrollMulti'),
         meta: {
-          title: '多个滚动',
+          title: 'Multiple scrolling',
           icon: 'rt-icon-doc'
         }
       },
@@ -81,7 +81,7 @@ const frameRoutes = {
         path: 'scroll-async',
         component: importPage('ScrollAsync'),
         meta: {
-          title: '异步滚动',
+          title: 'Asynchronous scrolling',
           icon: 'rt-icon-doc'
         }
       }
@@ -89,10 +89,10 @@ const frameRoutes = {
   }
 }
 
-// 获取目录下框架路由
+// Get the frame route under the directory
 const context = require.context('../components/frames/', false, /^.*\.vue$/)
 
-// 生成框架路由
+// Generate frame route
 const routes = context.keys().map(filePath => {
   const frame = filePath.match(/\w+/)[0]
   const path = '/' + pascal2Kebab(frame) + '/'
