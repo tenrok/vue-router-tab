@@ -56,14 +56,17 @@ export default {
 
   methods: {
     onDropAlive(context) {
+      // eslint-disable no-console
       console.log('on-drop-alive', context)
     },
 
     onPin(context) {
+      // eslint-disable no-console
       console.log('on-pin', context)
     },
 
     onUnpin(context) {
+      // eslint-disable no-console
       console.log('on-unpin', context)
     }
   }
