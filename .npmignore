@@ -1,4 +1,5 @@
-# 忽略目录/文件
+.github
+.vscode
 dist/docs
 dist/lib/**.html
 docs
@@ -7,21 +8,17 @@ node_modules
 public
 scripts
 src
-
-# 忽略指定文件
-yarn.lock
+.browserslistrc
+.editorconfig
+.eslintignore
+.eslintrc.js
+.gitattributes
+.npmrc
+.prettierrc.js
+.stylelintignore
+.stylelintrc.js
+.travis.yml
 babel.config.js
-tsconfig.json
-tslint.json
 jsconfig.json
 vue.config.js
-
-.eslintrc.js
-.eslintignore
-.prettierrc.js
-.browserslistrc
-
-.github
-.vscode
-.editorconfig
-.travis.yml
+yarn.lock
