@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["p-404-vue"],{"44ec":function(t,n,c){},"8cdb":function(t,n,c){"use strict";c.r(n);var e=function(){var t=this,n=t._self._c;return n("div",{staticClass:"page-404",class:{"global-404":"/404"===t.$route.path}},[t._m(0)])},s=[function(){var t=this,n=t._self._c;return n("div",[n("h2",[t._v("Page not found!!!")])])}],u=(c("98bd"),c("2877")),a={},i=Object(u["a"])(a,e,s,!1,null,"cab89716",null);n["default"]=i.exports},"98bd":function(t,n,c){"use strict";c("44ec")}}]);
+//# sourceMappingURL=p-404-vue.0663c680.js.map
