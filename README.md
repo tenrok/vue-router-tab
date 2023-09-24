@@ -1,7 +1,7 @@
 English | [简体中文](README.zh.md)
 
 <p align="center">
-  <a href="https://bhuh12.github.io/vue-router-tab/" target="_blank" rel="noopener noreferrer">
+  <a href="https://tenrok.github.io/vue-router-tab/" target="_blank" rel="noopener noreferrer">
     <img width="100" src="public/img/logo.png" alt="vue-router-tab logo">
   </a>
 </p>
@@ -12,37 +12,37 @@ English | [简体中文](README.zh.md)
   </a>
 
   <a href="https://github.com/vuejs/vue">
-    <img src="https://img.shields.io/badge/vue-2.5.22-brightgreen.svg" alt="vue">
+    <img src="https://img.shields.io/badge/vue-2.7.14-brightgreen.svg" alt="vue">
   </a>
 
   <a href="https://github.com/vuejs/vue-router">
-    <img src="https://img.shields.io/badge/vue--router-3.0.1-brightgreen.svg" alt="vue-router">
+    <img src="https://img.shields.io/badge/vue--router-3.5.2-brightgreen.svg" alt="vue-router">
   </a>
 
-  <a target="_blank" href="https://github.com/bhuh12/vue-router-tab">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/bhuh12/vue-router-tab.svg">
+  <a target="_blank" href="https://github.com/tenrok/vue-router-tab">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/tenrok/vue-router-tab.svg">
   </a>
 </p>
 
 <p align="center">
-  <a target="_blank" href="https://www.npmjs.com/package/vue-router-tab">
-    <img src="https://img.shields.io/npm/v/vue-router-tab.svg" alt="Version">
+  <a target="_blank" href="https://www.npmjs.com/package/@tenrok/vue-router-tab">
+    <img src="https://img.shields.io/npm/v/@tenrok/vue-router-tab.svg" alt="Version">
   </a>
 
-  <a target="_blank" href="https://npmcharts.com/compare/vue-router-tab?minimal=true">
-    <img src="https://img.shields.io/npm/dm/vue-router-tab.svg" alt="Downloads">
+  <a target="_blank" href="https://npmcharts.com/compare/@tenrok/vue-router-tab?minimal=true">
+    <img src="https://img.shields.io/npm/dm/@tenrok/vue-router-tab.svg" alt="Downloads">
   </a>
 
-  <a target="_blank" href="https://www.npmjs.com/package/vue-router-tab">
-    <img alt="npm bundle size" src="https://img.shields.io/bundlephobia/minzip/vue-router-tab.svg?label=gzip:JS">
+  <a target="_blank" href="https://www.npmjs.com/package/@tenrok/vue-router-tab">
+    <img alt="npm bundle size" src="https://img.shields.io/bundlephobia/minzip/@tenrok/vue-router-tab.svg?label=gzip:JS">
   </a>
 
-  <a target="_blank" href="https://www.npmjs.com/package/vue-router-tab">
-    <img alt="gzip size: css" src="http://img.badgesize.io/https://unpkg.com/vue-router-tab/dist/lib/vue-router-tab.css?compression=gzip&label=gzip:CSS">
+  <a target="_blank" href="https://www.npmjs.com/package/@tenrok/vue-router-tab">
+    <img alt="gzip size: css" src="http://img.badgesize.io/https://unpkg.com/@tenrok/vue-router-tab/dist/lib/vue-router-tab.css?compression=gzip&label=gzip:CSS">
   </a>
   
-  <a target="_blank" href="https://github.com/bhuh12/vue-router-tab/blob/main/LICENSE">
-    <img src="https://img.shields.io/npm/l/vue-router-tab.svg" alt="License">
+  <a target="_blank" href="https://github.com/tenrok/vue-router-tab/blob/main/LICENSE">
+    <img src="https://img.shields.io/npm/l/@tenrok/vue-router-tab.svg" alt="License">
   </a>
 </p>
 
@@ -58,61 +58,61 @@ Vue.js tab components, based on Vue Router.
 
 ✅ Tabs drag sort
 
-✅ [Tab Operations](https://bhuh12.github.io/vue-router-tab/guide/essentials/operate.html): open, switch, close, refresh, reset
+✅ [Tab Operations](https://tenrok.github.io/vue-router-tab/guide/essentials/operate.html): open, switch, close, refresh, reset
 
-✅ [Iframe tab](https://bhuh12.github.io/vue-router-tab/guide/essentials/iframe.html): for external website
+✅ [Iframe tab](https://tenrok.github.io/vue-router-tab/guide/essentials/iframe.html): for external website
 
-✅ Customized：[transition](https://bhuh12.github.io/vue-router-tab/guide/custom/transition.html), [slot](https://bhuh12.github.io/vue-router-tab/guide/custom/slot.html), [contextmenu](https://bhuh12.github.io/vue-router-tab/guide/custom/contextmenu.html)
+✅ Customized：[transition](https://tenrok.github.io/vue-router-tab/guide/custom/transition.html), [slot](https://tenrok.github.io/vue-router-tab/guide/custom/slot.html), [contextmenu](https://tenrok.github.io/vue-router-tab/guide/custom/contextmenu.html)
 
-✅ [I18n](https://bhuh12.github.io/vue-router-tab/guide/custom/i18n.html)
+✅ [I18n](https://tenrok.github.io/vue-router-tab/guide/custom/i18n.html)
 
-✅ [Keep scroll position](https://bhuh12.github.io/vue-router-tab/guide/custom/scroll.html) after tab switching
+✅ [Keep scroll position](https://tenrok.github.io/vue-router-tab/guide/custom/scroll.html) after tab switching
 
-✅ [Cache control](https://bhuh12.github.io/vue-router-tab/guide/advanced/cache.html): tab rules, cacheable, maximum keep alive, reusable
+✅ [Cache control](https://tenrok.github.io/vue-router-tab/guide/advanced/cache.html): tab rules, cacheable, maximum keep alive, reusable
 
-✅ [Dynamic Tab Info](https://bhuh12.github.io/vue-router-tab/guide/advanced/dynamic-tab-info.html): title, icon, tooltip
+✅ [Dynamic Tab Info](https://tenrok.github.io/vue-router-tab/guide/advanced/dynamic-tab-info.html): title, icon, tooltip
 
-✅ [Initial Tabs](https://bhuh12.github.io/vue-router-tab/guide/advanced/initial-tabs.html): initially opened tabs when entering page
+✅ [Initial Tabs](https://tenrok.github.io/vue-router-tab/guide/advanced/initial-tabs.html): initially opened tabs when entering page
 
-✅ [Restore Tabs](https://bhuh12.github.io/vue-router-tab/guide/advanced/restore.html): reopen tabs after browser refresh
+✅ [Restore Tabs](https://tenrok.github.io/vue-router-tab/guide/advanced/restore.html): reopen tabs after browser refresh
 
-✅ [Page Leave Confirm](https://bhuh12.github.io/vue-router-tab/guide/advanced/page-leave.html)
+✅ [Page Leave Confirm](https://tenrok.github.io/vue-router-tab/guide/advanced/page-leave.html)
 
-✅ [Nuxt Support](https://bhuh12.github.io/vue-router-tab/guide/essentials/nuxt.html)
+✅ [Nuxt Support](https://tenrok.github.io/vue-router-tab/guide/essentials/nuxt.html)
 
 ## 🔗 Links
 
-### [🛠 Installation](https://bhuh12.github.io/vue-router-tab/guide/essentials/installation.html)
+### [🛠 Installation](https://tenrok.github.io/vue-router-tab/guide/essentials/installation.html)
 
-### [📝 Documentation](https://bhuh12.github.io/vue-router-tab/) ([Gitee](https://bhuh12.gitee.io/vue-router-tab/))
+### [📝 Documentation](https://tenrok.github.io/vue-router-tab/)
 
-- [Introduction](https://bhuh12.github.io/vue-router-tab/guide/)
+- [Introduction](https://tenrok.github.io/vue-router-tab/guide/)
 
-- [Getting Started](https://bhuh12.github.io/vue-router-tab/guide/essentials/)
+- [Getting Started](https://tenrok.github.io/vue-router-tab/guide/essentials/)
 
-- [API](https://bhuh12.github.io/vue-router-tab/api/)
+- [API](https://tenrok.github.io/vue-router-tab/api/)
 
-### [📺 Online Demo](https://bhuh12.github.io/vue-router-tab/demo/) ([Gitee](https://bhuh12.gitee.io/vue-router-tab/demo/))
+### [📺 Online Demo](https://tenrok.github.io/vue-router-tab/demo/)
 
 ### [👨‍💻 Sample Project](https://github.com/bhuh12/router-tab-sample)
 
-### [📃 Changelog](https://bhuh12.github.io/vue-router-tab/guide/changelog.html)
+### [📃 Changelog](https://tenrok.github.io/vue-router-tab/guide/changelog.html)
 
 ---
 
 ## 🏷 NPM Task
 
-| Task                          | Command                 | Description                        |
-| ----------------------------- | ----------------------- | ---------------------------------- |
-| Lib build                     | `yarn lib:build`        |
-| Lib build and generate report | `yarn lib:build:report` |
-| Lib publish                   | `yarn lib:publish`      | change `version` in `package.json` |
-| Demo develop                  | `yarn demo:dev`         |
-| Demo build                    | `yarn demo:build`       |
-| Document develop              | `yarn docs:dev`         |
-| Document build                | `yarn docs:build`       |
-| Code format check and fix     | `yarn lint`             |
-| Commit code                   | `yarn commit`           |
+| Task                          | Command                    | Description                        |
+| ----------------------------- | -------------------------- | ---------------------------------- |
+| Lib build                     | `npm run lib:build`        |                                    |
+| Lib build and generate report | `npm run lib:build:report` |                                    |
+| Lib publish                   | `npm run lib:publish`      | change `version` in `package.json` |
+| Demo develop                  | `npm run demo:dev`         |                                    |
+| Demo build                    | `npm run demo:build`       |                                    |
+| Document develop              | `npm run docs:dev`         |                                    |
+| Document build                | `npm run docs:build`       |                                    |
+| Code format check and fix     | `npm run lint`             |                                    |
+| Commit code                   | `npm run commit`           |                                    |
 
 ## License
 
