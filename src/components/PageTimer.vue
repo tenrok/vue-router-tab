@@ -6,50 +6,50 @@
 </template>
 
 <script>
-// Page timer
-export default {
-  name: 'PageTimer',
+  // Page timer
+  export default {
+    name: 'PageTimer',
 
-  data() {
-    return {
-      openTime: new Date(),
-      pageTime: 0
-    }
-  },
-
-  mounted() {
-    this.updatePageTime()
-  },
-
-  activated() {
-    this.updatePageTime()
-  },
-
-  deactivated() {
-    this.clearPageTimer()
-  },
-
-  beforeDestroy() {
-    this.clearPageTimer()
-  },
-
-  methods: {
-    calcPageTime() {
-      this.pageTime = Math.floor((new Date() - this.openTime) / 1000)
+    data() {
+      return {
+        openTime: new Date(),
+        pageTime: 0
+      }
     },
 
-    updatePageTime() {
-      this.calcPageTime()
+    mounted() {
+      this.updatePageTime()
+    },
 
+    activated() {
+      this.updatePageTime()
+    },
+
+    deactivated() {
       this.clearPageTimer()
-
-      // Scheduled update events
-      this.pageTimer = setInterval(this.calcPageTime, 1000)
     },
 
-    clearPageTimer() {
-      clearInterval(this.pageTimer)
+    beforeDestroy() {
+      this.clearPageTimer()
+    },
+
+    methods: {
+      calcPageTime() {
+        this.pageTime = Math.floor((new Date() - this.openTime) / 1000)
+      },
+
+      updatePageTime() {
+        this.calcPageTime()
+
+        this.clearPageTimer()
+
+        // Scheduled update events
+        this.pageTimer = setInterval(this.calcPageTime, 1000)
+      },
+
+      clearPageTimer() {
+        clearInterval(this.pageTimer)
+      }
     }
   }
-}
 </script>

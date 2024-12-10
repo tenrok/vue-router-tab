@@ -40,445 +40,421 @@
 </template>
 
 <script>
-import { remove, mapGetters, getTransOpt, getCtorId } from '../util'
-import RouteMatch from '../util/RouteMatch'
+  import { remove, mapGetters, getTransOpt, getCtorId } from '../util'
+  import RouteMatch from '../util/RouteMatch'
 
-// Page listener hook
-const PAGE_HOOKS = [
-  'created',
-  'mounted',
-  'activated',
-  'deactivated',
-  'destroyed'
-]
+  // Page listener hook
+  const PAGE_HOOKS = ['created', 'mounted', 'activated', 'deactivated', 'destroyed']
 
-const TRANSFER_PREFIX = 'RouterTabDragSortIndex:'
+  const TRANSFER_PREFIX = 'RouterTabDragSortIndex:'
 
-/**
- * Route cache control
- */
-export default {
-  name: 'RouterAlive',
+  /**
+   * Route cache control
+   */
+  export default {
+    name: 'RouterAlive',
 
-  inject: ['onTabEvent'],
+    inject: ['onTabEvent'],
 
-  provide() {
-    // Provide an instance to the child component to call
-    return {
-      RouterAlive: this
-    }
-  },
-
-  props: {
-    // 默认是否开启缓存
-    keepAlive: {
-      type: Boolean,
-      default: false
+    provide() {
+      // Provide an instance to the child component to call
+      return {
+        RouterAlive: this
+      }
     },
 
-    // 是否复用路由组件
-    reuse: {
-      type: Boolean,
-      default: false
+    props: {
+      // Is caching enabled by default?
+      keepAlive: {
+        type: Boolean,
+        default: false
+      },
+
+      // Whether to reuse routing components
+      reuse: {
+        type: Boolean,
+        default: false
+      },
+
+      // Maximum number of caches, 0 means no limit
+      max: {
+        type: Number,
+        default: 0
+      },
+
+      // Page class
+      pageClass: {
+        type: [Array, Object, String],
+        default: 'router-alive-page'
+      },
+
+      // Page scroll element selector
+      pageScroller: {
+        type: String,
+        default: ''
+      },
+
+      // Transition effects
+      transition: {
+        type: [String, Object]
+      }
     },
 
-    // 最大缓存数，0 则不限制
-    max: {
-      type: Number,
-      default: 0
+    data() {
+      // Cache records
+      this.cache = {}
+
+      return {
+        // Route matching information
+        routeMatch: new RouteMatch(this),
+
+        // Page routing index
+        routeIndex: this.getRouteIndex(),
+
+        // Is it updating?
+        onRefresh: false
+      }
     },
 
-    // 页面 class
-    pageClass: {
-      type: [Array, Object, String],
-      default: 'router-alive-page'
+    computed: {
+      // Extract computed properties from this.routeMatch
+      ...mapGetters('routeMatch', ['key', 'meta', 'nest', 'alive', 'reusable', 'basePath', 'alivePath']),
+
+      // Listening for subpage hooks
+      hooks() {
+        return PAGE_HOOKS.reduce((events, hook) => {
+          events['hook:' + hook] = () => this.pageHook(hook)
+          return events
+        }, {})
+      },
+
+      // Page transition
+      pageTrans() {
+        return getTransOpt(this.transition)
+      }
     },
 
-    // 页面滚动元素选择器
-    pageScroller: {
-      type: String,
-      default: ''
+    watch: {
+      // Watch route
+      $route: {
+        handler($route, old) {
+          // Component ready
+          if (!old) this.$emit('ready', this)
+
+          if (!$route.matched.length) return
+
+          const { key, alive, reusable, alivePath, nest } = this
+          const cacheItem = this.cache[key] || {}
+          let { alivePath: cacheAlivePath, fullPath: cacheFullPath, vm: cacheVM } = cacheItem
+
+          // If it is not reused and the route changes, the component cache is cleaned up
+          if (cacheAlivePath && !reusable && cacheAlivePath !== alivePath) {
+            cacheAlivePath = ''
+            this.refresh(key)
+          }
+
+          // Nested routing, the address is inconsistent with the cache
+          if (nest && cacheVM && $route.fullPath !== cacheFullPath) {
+            const oldKey = this.matchRoute(old).key
+            if (oldKey !== key) {
+              this.nestForceUpdate = true
+            }
+          }
+
+          // Type: update or new cache
+          const type = cacheAlivePath ? 'update' : 'create'
+
+          this.$emit('change', type, this.routeMatch)
+
+          // Update cache path
+          if (alive) {
+            cacheItem.fullPath = $route.fullPath
+          }
+        },
+
+        immediate: true
+      }
     },
 
-    // 过渡效果
-    transition: {
-      type: [String, Object]
-    }
-  },
-
-  data() {
-    // 缓存记录
-    this.cache = {}
-
-    return {
-      // Route matching information
-      routeMatch: new RouteMatch(this),
-
-      // 页面路由索引
-      routeIndex: this.getRouteIndex(),
-
-      // 是否正在更新
-      onRefresh: false
-    }
-  },
-
-  computed: {
-    // 从 this.routeMatch 提取计算属性
-    ...mapGetters('routeMatch', [
-      'key',
-      'meta',
-      'nest',
-      'alive',
-      'reusable',
-      'basePath',
-      'alivePath'
-    ]),
-
-    // 监听子页面钩子
-    hooks() {
-      return PAGE_HOOKS.reduce((events, hook) => {
-        events['hook:' + hook] = () => this.pageHook(hook)
-        return events
-      }, {})
+    mounted() {
+      // Get keepAlive component instance
+      this.$refs.alive = this._vnode.children[0].child._vnode.componentInstance
     },
 
-    // 页面过渡
-    pageTrans() {
-      return getTransOpt(this.transition)
-    }
-  },
+    // Cleaning up after destruction
+    destroyed() {
+      this.cache = null
+      this.routeMatch = null
+      this._match = null
+      this.$refs.alive = null
+    },
 
-  watch: {
-    // Watch route
-    $route: {
-      handler($route, old) {
-        // Component ready
-        if (!old) this.$emit('ready', this)
+    methods: {
+      onDragOver(e) {
+        e.dataTransfer.dropEffect = 'link'
+      },
 
-        if (!$route.matched.length) return
+      onDrop(e) {
+        const { items } = this.$tabs
+        const raw = e.dataTransfer.getData('text')
 
-        const { key, alive, reusable, alivePath, nest } = this
-        const cacheItem = this.cache[key] || {}
-        let {
-          alivePath: cacheAlivePath,
-          fullPath: cacheFullPath,
-          vm: cacheVM
-        } = cacheItem
+        if (typeof raw !== 'string' || !raw.startsWith(TRANSFER_PREFIX)) return
 
-        // If it is not reused and the route changes, the component cache is cleaned up
-        if (cacheAlivePath && !reusable && cacheAlivePath !== alivePath) {
-          cacheAlivePath = ''
-          this.refresh(key)
-        }
+        const fromIndex = raw.replace(TRANSFER_PREFIX, '')
+        const tab = items[fromIndex]
 
-        // Nested routing, the address is inconsistent with the cache
-        if (nest && cacheVM && $route.fullPath !== cacheFullPath) {
-          const oldKey = this.matchRoute(old).key
-          if (oldKey !== key) {
-            this.nestForceUpdate = true
+        this.onTabEvent('drop-alive', { $tabs: this.$tabs, data: tab })
+      },
+
+      // Get page routing index
+      getRouteIndex() {
+        let cur = this
+        let depth = -1 // routing depth
+
+        while (cur && depth < 0) {
+          const { data } = cur.$vnode || {}
+          if (data && data.routerView) {
+            depth = data.routerViewDepth
+          } else {
+            cur = cur.$parent
           }
         }
 
-        // Type: update or new cache
-        const type = cacheAlivePath ? 'update' : 'create'
+        return depth + 1
+      },
 
-        this.$emit('change', type, this.routeMatch)
+      // Remove cache
+      remove(key = this.key) {
+        const $alive = this.$refs.alive
 
-        // Update cache path
-        if (alive) {
-          cacheItem.fullPath = $route.fullPath
+        if (!$alive) return
+
+        const cacheItem = this.cache[key]
+        const { cache, keys } = $alive
+
+        // Destroy the cache component instance and clean up the Router Alive cache records
+        if (cacheItem) {
+          cacheItem.vm.$destroy()
+          cacheItem.vm = null
+          this.cache[key] = null
+        }
+
+        // Clear keepAlive cache records
+        Object.entries(cache).find(([id, item]) => {
+          const vm = item?.componentInstance
+          if (vm?.$vnode?.data?.key === key) {
+            // Destroy component instance
+            vm.$destroy()
+
+            cache[id] = null
+            remove(keys, id)
+
+            return true
+          }
+        })
+      },
+
+      // Refresh
+      refresh(key = this.key) {
+        this.remove(key)
+
+        // Not the current cache, remove directly
+        if (key === this.key) {
+          this.reload()
         }
       },
 
-      immediate: true
-    }
-  },
+      // Reload
+      reload() {
+        if (this.onRefresh) return
 
-  mounted() {
-    // 获取 keepAlive 组件实例
-    this.$refs.alive = this._vnode.children[0].child._vnode.componentInstance
-  },
+        this.onRefresh = true
+      },
 
-  // 销毁后清理
-  destroyed() {
-    this.cache = null
-    this.routeMatch = null
-    this._match = null
-    this.$refs.alive = null
-  },
+      // Cache page component hook
+      pageHook(hook) {
+        const handler = this[`pageHook:${hook}`]
+        if (typeof handler === 'function') handler()
+      },
 
-  methods: {
-    onDragOver(e) {
-      e.dataTransfer.dropEffect = 'link'
-    },
-
-    onDrop(e) {
-      const { items } = this.$tabs
-      const raw = e.dataTransfer.getData('text')
-
-      if (typeof raw !== 'string' || !raw.startsWith(TRANSFER_PREFIX)) return
-
-      const fromIndex = raw.replace(TRANSFER_PREFIX, '')
-      const tab = items[fromIndex]
-
-      this.onTabEvent('drop-alive', { $tabs: this.$tabs, data: tab })
-    },
-
-    // 获取页面路由索引
-    getRouteIndex() {
-      let cur = this
-      let depth = -1 // 路由深度
-
-      while (cur && depth < 0) {
-        const { data } = cur.$vnode || {}
-        if (data && data.routerView) {
-          depth = data.routerViewDepth
-        } else {
-          cur = cur.$parent
+      // Page creation
+      'pageHook:created'() {
+        this.cache[this.key] = {
+          alivePath: this.alivePath,
+          fullPath: this.$route.fullPath
         }
-      }
+      },
 
-      return depth + 1
-    },
+      // Page mounting
+      'pageHook:mounted'() {
+        this.cache[this.key].vm = this.$refs.page
 
-    // 移除缓存
-    remove(key = this.key) {
-      const $alive = this.$refs.alive
+        // Reset initial scroll position
+        this.resetScrollPosition()
+      },
 
-      if (!$alive) return
+      // Page activation
+      'pageHook:activated'() {
+        const pageVm = this.$refs.page
 
-      const cacheItem = this.cache[key]
-      const { cache, keys } = $alive
+        // Hot reload updates
+        if (this.checkHotReloading()) return
 
-      // 销毁缓存组件实例，清理 RouterAlive 缓存记录
-      if (cacheItem) {
-        cacheItem.vm.$destroy()
-        cacheItem.vm = null
-        this.cache[key] = null
-      }
+        // Nested routing cache causes forced update when page does not match
+        if (this.nestForceUpdate) {
+          delete this.nestForceUpdate
+          pageVm.$forceUpdate()
+        }
 
-      // 清理 keepAlive 缓存记录
-      Object.entries(cache).find(([id, item]) => {
-        const vm = item?.componentInstance
-        if (vm?.$vnode?.data?.key === key) {
-          // 销毁组件实例
-          vm.$destroy()
+        // Restore scroll position
+        this.restoreScrollPosition()
+      },
 
-          cache[id] = null
-          remove(keys, id)
+      // Page deactivation
+      'pageHook:deactivated'() {
+        if (this.checkHotReloading()) return
 
+        // Save scroll position
+        this.saveScrollPosition()
+      },
+
+      // Clean up cache after page destruction
+      async 'pageHook:destroyed'() {
+        await this.$nextTick()
+
+        if (!this.cache) return
+
+        // Clear cached information of destroyed pages
+        Object.entries(this.cache).forEach(([key, item]) => {
+          const { vm } = item || {}
+          if (vm && vm._isDestroyed) {
+            this.remove(key)
+          }
+        })
+      },
+
+      // End refresh state after page transition
+      onTrans() {
+        if (this.onRefresh) {
+          this.onRefresh = false
+          this.$emit('change', 'create', this.routeMatch)
+        }
+      },
+
+      // Match routing information
+      matchRoute($route) {
+        const matched = this._match
+
+        // Current routes
+        if ($route === this.$route || $route.fullPath === this.$route.fullPath || $route === this.$route.fullPath) {
+          return this.routeMatch
+        }
+
+        if (matched) {
+          matched.$route = $route
+          return matched
+        }
+
+        return (this._match = new RouteMatch(this, $route))
+      },
+
+      // Detect hot reload
+      checkHotReloading() {
+        const pageVm = this.$refs.page
+        const lastCid = pageVm._lastCtorId
+        const cid = (pageVm._lastCtorId = getCtorId(pageVm))
+
+        // Hot reload update
+        if (lastCid && lastCid !== cid) {
+          this.refresh()
           return true
         }
-      })
-    },
 
-    // 刷新
-    refresh(key = this.key) {
-      this.remove(key)
+        return false
+      },
 
-      // 非当前缓存，直接移除
-      if (key === this.key) {
-        this.reload()
-      }
-    },
+      // Get the scroll element
+      getScroller(selector) {
+        return selector.startsWith('$') ? document.querySelector(selector.replace(/^\$/, '')) : this.$el.querySelector(selector)
+      },
 
-    // 重新加载
-    reload() {
-      if (this.onRefresh) return
+      // Save scroll position
+      saveScrollPosition() {
+        const pageVm = this.$refs.page
 
-      this.onRefresh = true
-    },
+        if (!pageVm) return
 
-    // 缓存页面组件钩子
-    pageHook(hook) {
-      const handler = this[`pageHook:${hook}`]
-      if (typeof handler === 'function') handler()
-    },
+        // Scroll elements configured inside the page
+        let { pageScroller } = pageVm.$vnode.componentOptions.Ctor.options
 
-    // 页面创建
-    'pageHook:created'() {
-      this.cache[this.key] = {
-        alivePath: this.alivePath,
-        fullPath: this.$route.fullPath
-      }
-    },
-
-    // 页面挂载
-    'pageHook:mounted'() {
-      this.cache[this.key].vm = this.$refs.page
-
-      // 重置初始滚动位置
-      this.resetScrollPosition()
-    },
-
-    // 页面激活
-    'pageHook:activated'() {
-      const pageVm = this.$refs.page
-
-      // 热重载更新
-      if (this.checkHotReloading()) return
-
-      // 嵌套路由缓存导致页面不匹配时强制更新
-      if (this.nestForceUpdate) {
-        delete this.nestForceUpdate
-        pageVm.$forceUpdate()
-      }
-
-      // 还原滚动位置
-      this.restoreScrollPosition()
-    },
-
-    // 页面失活
-    'pageHook:deactivated'() {
-      if (this.checkHotReloading()) return
-
-      // 保存滚动位置
-      this.saveScrollPosition()
-    },
-
-    // 页面销毁后清理 cache
-    async 'pageHook:destroyed'() {
-      await this.$nextTick()
-
-      if (!this.cache) return
-
-      // 清理已销毁页面的缓存信息
-      Object.entries(this.cache).forEach(([key, item]) => {
-        const { vm } = item || {}
-        if (vm && vm._isDestroyed) {
-          this.remove(key)
+        if (typeof pageScroller === 'string' && pageScroller.length) {
+          pageScroller = pageScroller.split(/\s?,\s?/)
         }
-      })
-    },
 
-    // 页面过渡后结束刷新状态
-    onTrans() {
-      if (this.onRefresh) {
-        this.onRefresh = false
-        this.$emit('change', 'create', this.routeMatch)
-      }
-    },
+        if (!Array.isArray(pageScroller)) {
+          pageScroller = []
+        }
 
-    // Match routing information
-    matchRoute($route) {
-      const matched = this._match
+        // The default save page root node location
+        pageScroller.push('.' + this.pageClass)
 
-      // 当前路由
-      if (
-        $route === this.$route ||
-        $route.fullPath === this.$route.fullPath ||
-        $route === this.$route.fullPath
-      ) {
-        return this.routeMatch
-      }
+        // Add global scroll element configuration
+        // Component external selectors are distinguished by the $ prefix
+        if (this.pageScroller) {
+          pageScroller.push('$' + this.pageScroller)
+        }
 
-      if (matched) {
-        matched.$route = $route
-        return matched
-      }
+        // Recording location
+        const position = pageScroller.reduce((pos, selector) => {
+          const el = this.getScroller(selector)
 
-      return (this._match = new RouteMatch(this, $route))
-    },
-
-    // Detect hot reload
-    checkHotReloading() {
-      const pageVm = this.$refs.page
-      const lastCid = pageVm._lastCtorId
-      const cid = (pageVm._lastCtorId = getCtorId(pageVm))
-
-      // Hot reload update
-      if (lastCid && lastCid !== cid) {
-        this.refresh()
-        return true
-      }
-
-      return false
-    },
-
-    // 获取滚动元素
-    getScroller(selector) {
-      return selector.startsWith('$')
-        ? document.querySelector(selector.replace(/^\$/, ''))
-        : this.$el.querySelector(selector)
-    },
-
-    // 保存滚动位置
-    saveScrollPosition() {
-      const pageVm = this.$refs.page
-
-      if (!pageVm) return
-
-      // 页面内部配置的滚动元素
-      let { pageScroller } = pageVm.$vnode.componentOptions.Ctor.options
-
-      if (typeof pageScroller === 'string' && pageScroller.length) {
-        pageScroller = pageScroller.split(/\s?,\s?/)
-      }
-
-      if (!Array.isArray(pageScroller)) {
-        pageScroller = []
-      }
-
-      // 默认保存页面根节点位置
-      pageScroller.push('.' + this.pageClass)
-
-      // 添加全局的滚动元素配置
-      // 组件外部选择器使用 $ 前缀区分
-      if (this.pageScroller) {
-        pageScroller.push('$' + this.pageScroller)
-      }
-
-      // 记录位置
-      const position = pageScroller.reduce((pos, selector) => {
-        const el = this.getScroller(selector)
-
-        if (el) {
-          pos[selector] = {
-            left: el.scrollLeft,
-            top: el.scrollTop
+          if (el) {
+            pos[selector] = {
+              left: el.scrollLeft,
+              top: el.scrollTop
+            }
           }
-        }
 
-        return pos
-      }, {})
+          return pos
+        }, {})
 
-      pageVm._pageScrollPosition = position
-    },
+        pageVm._pageScrollPosition = position
+      },
 
-    // 还原滚动位置
-    restoreScrollPosition() {
-      const pageVm = this.$refs.page
-      const position = pageVm?._pageScrollPosition
+      // Restore scroll position
+      restoreScrollPosition() {
+        const pageVm = this.$refs.page
+        const position = pageVm?._pageScrollPosition
 
-      if (!position) return
+        if (!position) return
 
-      Object.entries(position).forEach(([selector, pos]) => {
-        const el = this.getScroller(selector)
-        if (el) {
-          el.scrollLeft = pos.left
-          el.scrollTop = pos.top
-        }
-      })
-    },
+        Object.entries(position).forEach(([selector, pos]) => {
+          const el = this.getScroller(selector)
+          if (el) {
+            el.scrollLeft = pos.left
+            el.scrollTop = pos.top
+          }
+        })
+      },
 
-    // 重置全局滚动位置
-    resetScrollPosition() {
-      if (!this.pageScroller) return
+      // Reset global scroll position
+      resetScrollPosition() {
+        if (!this.pageScroller) return
 
-      const el = this.getScroller('$' + this.pageScroller)
+        const el = this.getScroller('$' + this.pageScroller)
 
-      if (!el) return
+        if (!el) return
 
-      el.scrollLeft = 0
-      el.scrollTop = 0
-    },
+        el.scrollLeft = 0
+        el.scrollTop = 0
+      },
 
-    // 页面数据加载成功
-    async onPageLoaded() {
-      await this.$nextTick()
-      // 页面数据加载成功后还原滚动位置
-      this.restoreScrollPosition()
+      // Page data loaded successfully
+      async onPageLoaded() {
+        await this.$nextTick()
+        // Restore scroll position after page data is loaded successfully
+        this.restoreScrollPosition()
+      }
     }
   }
-}
 </script>

@@ -3,10 +3,7 @@ import extendRoutes from '../utils/extendRoutes'
 import getPageRoutes from './page'
 
 // PascalCase to kebab-case
-const pascal2Kebab = str =>
-  str
-    .replace(/([a-z])([A-Z])/g, ($, $1, $2) => $1 + '-' + $2.toLowerCase())
-    .replace(/^([A-Z])/, ($, $1) => $1.toLowerCase())
+const pascal2Kebab = str => str.replace(/([a-z])([A-Z])/g, ($, $1, $2) => $1 + '-' + $2.toLowerCase()).replace(/^([A-Z])/, ($, $1) => $1.toLowerCase())
 
 // Need custom framework routing
 const frameRoutes = {

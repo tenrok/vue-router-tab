@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>页面1</h2>
+    <h2>Page 1</h2>
     <input type="text" />
   </div>
 </template>

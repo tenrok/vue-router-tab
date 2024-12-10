@@ -33,10 +33,7 @@ export default [
     text: 'Page function',
     children: [
       { text: 'Dynamic tab configuration', to: '/default/tab-dynamic' },
-      {
-        text: 'Confirmation of leaving the page',
-        to: '/initial-tabs/page-leave'
-      },
+      { text: 'Confirmation of leaving the page', to: '/initial-tabs/page-leave' },
       { text: 'Nested routes', to: '/default/nest/1' }
     ]
   },

@@ -12,7 +12,7 @@
 </template>
 
 <style lang="scss" scoped>
-.global-404 {
-  padding: 15px;
-}
+  .global-404 {
+    padding: 15px;
+  }
 </style>

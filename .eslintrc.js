@@ -25,9 +25,9 @@ module.exports = {
     'vue/no-unused-vars': 'warn',
     'vue/require-default-prop': 'off',
     'vue/no-mutating-props': 'off',
-    // Vue 单文件块空行
+    // Vue single file block blank line
     'vue/padding-line-between-blocks': 2,
-    // 多行属性添加空行
+    // Multi-line attributes add empty lines
     'vue/new-line-between-multi-line-property': [
       'error',
       {

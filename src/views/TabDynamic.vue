@@ -5,14 +5,20 @@
     <div class="form-item">
       <label>
         <p>Modify tab title</p>
-        <input v-model="routeTab.title" type="text" />
+        <input
+          v-model="routeTab.title"
+          type="text"
+        />
       </label>
     </div>
 
     <div class="form-item">
       <label>
         <p>Modify tab tips</p>
-        <input v-model="routeTab.tips" type="text" />
+        <input
+          v-model="routeTab.tips"
+          type="text"
+        />
       </label>
     </div>
 
@@ -31,39 +37,39 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      routeTab: {
-        title: 'Dynamic tab',
-        icon: 'rt-icon-log',
-        tips: ''
-      },
+  export default {
+    data() {
+      return {
+        routeTab: {
+          title: 'Dynamic tab',
+          icon: 'rt-icon-log',
+          tips: ''
+        },
 
-      icons: ['rt-icon-log', 'rt-icon-doc', 'rt-icon-contact']
+        icons: ['rt-icon-log', 'rt-icon-doc', 'rt-icon-contact']
+      }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>
-.form-item {
-  margin-bottom: 1rem;
+  .form-item {
+    margin-bottom: 1rem;
 
-  p {
-    margin: 0.5em 0;
-  }
-}
-
-.tab-icons {
-  a {
-    margin-right: 1em;
-    font-size: 20px;
-    cursor: pointer;
-
-    &.is-active {
-      color: $color;
+    p {
+      margin: 0.5em 0;
     }
   }
-}
+
+  .tab-icons {
+    a {
+      margin-right: 1em;
+      font-size: 20px;
+      cursor: pointer;
+
+      &.is-active {
+        color: $color;
+      }
+    }
+  }
 </style>
